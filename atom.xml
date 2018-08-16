@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-15T10:20:37.379Z</updated>
+  <updated>2018-08-16T06:58:19.689Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,29 +17,17 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>my-first-blog</title>
-    <link href="http://yoursite.com/2018/08/15/my-first-blog/"/>
-    <id>http://yoursite.com/2018/08/15/my-first-blog/</id>
-    <published>2018-08-15T10:20:37.000Z</published>
-    <updated>2018-08-15T10:20:37.379Z</updated>
+    <title>Java 注解简介</title>
+    <link href="http://yoursite.com/2018/08/16/Java-%E6%B3%A8%E8%A7%A3%E7%AE%80%E4%BB%8B/"/>
+    <id>http://yoursite.com/2018/08/16/Java-注解简介/</id>
+    <published>2018-08-16T06:56:03.000Z</published>
+    <updated>2018-08-16T06:58:19.689Z</updated>
     
     <summary type="html">
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>hello hexo</title>
-    <link href="http://yoursite.com/2018/08/15/hello-hexo/"/>
-    <id>http://yoursite.com/2018/08/15/hello-hexo/</id>
-    <published>2018-08-15T08:52:33.000Z</published>
-    <updated>2018-08-15T08:52:33.781Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
+      <category term="Java 基础" scheme="http://yoursite.com/categories/Java-%E5%9F%BA%E7%A1%80/"/>
     
     
   </entry>
