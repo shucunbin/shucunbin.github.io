@@ -17,6 +17,8 @@
 
 
 
+  <meta name="description" content="Java事务管理（一）"/>
+
 
 
 
@@ -38,7 +40,7 @@
 
 
 
-<link rel="canonical" href="https://shucunbin.github.io/"/>
+<link rel="canonical" href="https://shucunbin.github.io/2018/08/16/数据库事务/"/>
 
 
 
@@ -85,7 +87,7 @@
   window.config = {"title":"shucunbin's blog","subtitle":null,"description":null,"author":"cunbin.shu","language":null,"timezone":null,"url":"https://shucunbin.github.io","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":"README.md","new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","repo":"git@github.com:shucunbin/shucunbin.github.io.git","branch":"master"},"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"admin":{"deployCommand":"./hexo-deploy.sh"},"category_generator":{"per_page":10},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"feed":{"type":"atom","limit":20,"hub":"","content":true,"content_limit":140,"content_limit_delim":"","path":"atom.xml"},"tag_generator":{"per_page":10},"server":{"port":4000,"log":false,"ip":"0.0.0.0","compress":false,"header":true},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"since":2018,"favicon":"/favicon.ico","rss":"default","menu":{"Home":"/","Categories":"/categories","Archives":"/archives/","Github":"https://github.com/shucunbin"},"color":"Default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":true,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"shucunbin@163.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/shucunbin","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.9.0"};
 </script>
 
-    <title> shucunbin's blog </title>
+    <title> Java事务管理（一） - shucunbin's blog </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -196,14 +198,12 @@
         <div class="content-wrapper">
           <div id="content" class="content">
             
-  <section id="posts" class="posts">
-    
-      
+  
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2018/08/16/数据库事务/">Java事务管理（一）</a>
+          Java事务管理（一）
         
       </h1>
 
@@ -224,15 +224,18 @@
 
     
     
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、数据库事务"><span class="toc-text">一、数据库事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-事务的定义"><span class="toc-text">1. 事务的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-事务的特性"><span class="toc-text">2. 事务的特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-事务的实现"><span class="toc-text">3. 事务的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-事务的隔离级别与数据库锁"><span class="toc-text">4.  事务的隔离级别与数据库锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-多个事务并发执行的问题"><span class="toc-text">4.1 多个事务并发执行的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-1-脏读（dirty-read）"><span class="toc-text">4.1.1 脏读（dirty read）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-不可重复读（unrepeatable-read）"><span class="toc-text">4.1.2 不可重复读（unrepeatable read）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-3-幻读（phantom-read）"><span class="toc-text">4.1.3 幻读（phantom read）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-4-第一类丢失更新"><span class="toc-text">4.1.4 第一类丢失更新</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-5-第二类丢失更新"><span class="toc-text">4.1.5 第二类丢失更新</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-数据库锁"><span class="toc-text">4.2 数据库锁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1-锁的分类"><span class="toc-text">4.2.1 锁的分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1-1-悲观锁"><span class="toc-text">4.2.1.1 悲观锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1-2-乐观锁"><span class="toc-text">4.2.1.2 乐观锁</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-事务隔离级别"><span class="toc-text">4.3 事务隔离级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-总结"><span class="toc-text">4.4 总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、参考文献"><span class="toc-text">5、参考文献</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
 
 
     <div class="post-content">
       
-        
-        
-
-        
-          <h1 id="一、数据库事务"><a href="#一、数据库事务" class="headerlink" title="一、数据库事务"></a>一、数据库事务</h1><h2 id="1-事务的定义"><a href="#1-事务的定义" class="headerlink" title="1. 事务的定义"></a>1. 事务的定义</h2><p>下面是来自维基百科的定义<a href="[数据库事务-维基百科](https://zh.wikipedia.org/zh-hans/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1)">^1</a>：</p>
+        <h1 id="一、数据库事务"><a href="#一、数据库事务" class="headerlink" title="一、数据库事务"></a>一、数据库事务</h1><h2 id="1-事务的定义"><a href="#1-事务的定义" class="headerlink" title="1. 事务的定义"></a>1. 事务的定义</h2><p>下面是来自维基百科的定义<a href="[数据库事务-维基百科](https://zh.wikipedia.org/zh-hans/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1)">^1</a>：</p>
 <blockquote>
 <p>数据库事务（简称：事务），它指是数据库管理系统（DBMS）执行过程中的一个逻辑单位，由一个<strong>有限的</strong>数据库<strong>操作序列</strong>构成。<br>一个数据库事务通常包含了一个的对数据库读/写操作序列，它的存在包含有以下两个目的：</p>
 </blockquote>
@@ -554,87 +557,63 @@
 <p><a href="http://hedengcheng.com/?p=771" target="_blank" rel="noopener">MySQL 加锁处理分析</a></p>
 <h2 id="5、参考文献"><a href="#5、参考文献" class="headerlink" title="5、参考文献"></a>5、参考文献</h2><p><a href="https://blog.csdn.net/moqsien/article/details/79519699" target="_blank" rel="noopener">对MySQL中的事务（TRANSACTION）机制的一点理解</a><br><a href="http://hedengcheng.com/?p=771" target="_blank" rel="noopener">MySQL 加锁处理分析</a><br><a href="https://zhuanlan.zhihu.com/p/31875702" target="_blank" rel="noopener">Mysql Innodb 中的锁</a><br><a href="https://www.cnblogs.com/sheseido/p/5038562.html" target="_blank" rel="noopener">乐观锁解决高并发</a><br><a href="https://www.cnblogs.com/YFYkuner/p/5178684.html" target="_blank" rel="noopener">什么是MVCC</a><br><a href="//www.zhihu.com/question/65292792/answer/229459320">谈谈分布式事务有哪些特点？</a></p>
 
-        
       
     </div>
 
     
-
-    
-
-  </article>
-
-    
       
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2018/08/16/Java-注解简介/">Java 注解简介</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2018-08-16
-        </span>
-        
-          <div class="post-category">
-            
-              <a href="/categories/Java-基础/">Java 基础</a>
-            
-          </div>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-
-    <div class="post-content">
       
-        
-        
-          
-        
 
-        
-          <h3 id="什么是元数据（metadata）"><a href="#什么是元数据（metadata）" class="headerlink" title="什么是元数据（metadata）"></a>什么是元数据（metadata）</h3><p>元数据从 metadata 一词译来，就是“关于数据的数据”的意思。元数据的功能作用有很多，比如：你可能用过 Javadoc 的注释自动生成文档。这就是元数据功能的一种。总的来说，元数据可以用来创建文档，跟踪代码的依赖性，执行编译时格式检查，代替已有的配置文件。如果要对于元数据的作用进行分类，目前还没有明确的定义，不过我们可以根据它所起的作用，大致可分为三类：</p>
-<ol>
-<li>编写文档：通过代码里标识的元数据生成文档。</li>
-<li>代码分析：通过代码里标识的元数据对代码进行分析。</li>
-<li>编译检查：通过代码里标识的元数据让编译器能实现基本的编译检查</li>
-</ol>
-<p>在 Java 中元数据以标签的形式存在于 Java 代码中，元数据标签的存在并不影响程序代码的编译和执行，它只是被用来生成其它的文件或针在运行时知道被运行代码的描述信息，而注解正是 Java 中的一种元数据。</p>
-<h3 id="什么是注解（annotation"><a href="#什么是注解（annotation" class="headerlink" title="什么是注解（annotation)"></a>什么是注解（annotation)</h3><p>注解，顾名思义，它是对某一事物进行添加注释说明，会存放一些信息，这些信息可能对以后某个时段来说是很有用处的。Java 注解是 Java 提供了一套机制，使得我们可以对方法、类、参数、包、域以及变量等添加标准(即附上某些信息)，且在以后某个时段通过反射将标注的信息提取出来以供使用。</p>
-<p>注解不能影响程序代码的执行，无论增加、删除注解，代码都始终如一的执行。另外，尽管一些注解通过 Java 的反射 API 方法在运行时被访问，而 Java 语言解释器在工作时忽略了这些注解。正是由于Java 虚拟机忽略了注解，导致了注解类型在代码中是“不起作用”的，只有通过某种配套的工具才会对注解类型中的信息进行访问和处理。</p>
-          <div class="read-more">
-            <a href="/2018/08/16/Java-注解简介/" class="read-more-link">阅读更多</a>
-          </div>
-        
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://shucunbin.github.io">cunbin.shu</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://shucunbin.github.io/2018/08/16/数据库事务/">https://shucunbin.github.io/2018/08/16/数据库事务/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
       
-    </div>
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
 
+
+
+      
+      
     
 
     
-
-  </article>
-
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
     
-  </section>
-
-  
-  <nav class="pagination">
     
+      <a class="next" href="/2018/08/16/Java-注解简介/">
+        <span class="next-text nav-default">Java 注解简介</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
 
+      </footer>
+    
+
+  </article>
+
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
       </main>
@@ -715,6 +694,11 @@
     </div>
 
     
+  
+  
+
+  
+
 
 
     
