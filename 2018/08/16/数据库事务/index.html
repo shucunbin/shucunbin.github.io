@@ -84,7 +84,7 @@
 
 
 <script>
-  window.config = {"title":"shucunbin's blog","subtitle":null,"description":null,"author":"cunbin.shu","language":null,"timezone":null,"url":"https://shucunbin.github.io","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":"README.md","new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","repo":"git@github.com:shucunbin/shucunbin.github.io.git","branch":"master"},"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"admin":{"deployCommand":"./hexo-deploy.sh"},"category_generator":{"per_page":10},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"feed":{"type":"atom","limit":20,"hub":"","content":true,"content_limit":140,"content_limit_delim":"","path":"atom.xml"},"tag_generator":{"per_page":10},"server":{"port":4000,"log":false,"ip":"0.0.0.0","compress":false,"header":true},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"since":2018,"favicon":"/favicon.ico","rss":"default","menu":{"Home":"/","Categories":"/categories","Archives":"/archives/","Github":"https://github.com/shucunbin"},"color":"Default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":true,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"shucunbin@163.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/shucunbin","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.9.0"};
+  window.config = {"title":"shucunbin's blog","subtitle":null,"description":null,"author":"cunbin.shu","language":null,"timezone":null,"url":"https://shucunbin.github.io","root":"/","permalink":":year/:month/:day/:title/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":"README.md","new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":{"type":"git","repo":"git@github.com:shucunbin/shucunbin.github.io.git","branch":"master"},"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"admin":{"deployCommand":"./hexo-deploy.sh"},"feed":{"type":"atom","limit":20,"hub":"","content":true,"content_limit":140,"content_limit_delim":"","path":"atom.xml"},"tag_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"ip":"0.0.0.0","compress":false,"header":true},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":10},"since":2018,"favicon":"/favicon.ico","rss":"default","menu":{"Home":"/","Categories":"/categories","Archives":"/archives/","Github":"https://github.com/shucunbin"},"color":"Default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":true,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"shucunbin@163.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/shucunbin","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":null,"app_key":null},"baidu_analytics":null,"baidu_verification":null,"google_analytics":null,"google_verification":null,"disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":null,"version":"2.9.0"};
 </script>
 
     <title> Java事务管理（一） - shucunbin's blog </title>
@@ -357,7 +357,47 @@
 </tbody>
 </table>
 <p>在同一事务中，T4 和 T7 读取到的余票值不一样。</p>
-<h4 id="4-1-3-幻读（phantom-read）"><a href="#4-1-3-幻读（phantom-read）" class="headerlink" title="4.1.3 幻读（phantom read）"></a>4.1.3 幻读（phantom read）</h4><p>幻读是指 A 事务读取到了 B 事务新增的数据。<br>| 时序 | 事务A | 事务B |<br>|:-|:—-|:—-|<br>| T1 | 开启事务 |  |<br>| T2 |  | 开启事务 |<br>| T3 | 统计8月1日-8月3日售出的总票数为 100 张  |  |<br>| T4 |  | 补录8月1日-8月3日其它渠道售出的票数 5 张 |<br>| T5 |  | 提交事务 |<br>| T6 | 再次统计8月1日-8月3日售出的总票数为 105 张  |  |</p>
+<h4 id="4-1-3-幻读（phantom-read）"><a href="#4-1-3-幻读（phantom-read）" class="headerlink" title="4.1.3 幻读（phantom read）"></a>4.1.3 幻读（phantom read）</h4><p>幻读是指 A 事务读取到了 B 事务新增的数据。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">时序</th>
+<th style="text-align:left">事务A</th>
+<th style="text-align:left">事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">T1</td>
+<td style="text-align:left">开启事务</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">T2</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">开启事务</td>
+</tr>
+<tr>
+<td style="text-align:left">T3</td>
+<td style="text-align:left">统计8月1日-8月3日售出的总票数为 100 张</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">T4</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">补录8月1日-8月3日其它渠道售出的票数 5 张</td>
+</tr>
+<tr>
+<td style="text-align:left">T5</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">提交事务</td>
+</tr>
+<tr>
+<td style="text-align:left">T6</td>
+<td style="text-align:left">再次统计8月1日-8月3日售出的总票数为 105 张</td>
+</tr>
+</tbody>
+</table>
 <p>事务 B 在 事务 A 的查询条件范围内新增了记录，造成两次的统计结果不一致。幻读与不可重复读是两个容易混淆的概念，前者是读取到了其它事务<strong>已经提交的新增数据</strong>，后者是读取到其它事务<strong>已提交的更新数据</strong>，因此，解决它们造成问题所采取的解决措施也各自不同。</p>
 <h4 id="4-1-4-第一类丢失更新"><a href="#4-1-4-第一类丢失更新" class="headerlink" title="4.1.4 第一类丢失更新"></a>4.1.4 第一类丢失更新</h4><p>第一类丢失更新是指 A 事务撤销时，把已经提交的 B 事务的更新数据覆盖了。</p>
 <table>
