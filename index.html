@@ -279,6 +279,253 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2018/09/29/springboot-data-elasticsearch-版本整理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cunbin.shu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shucunbin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/29/springboot-data-elasticsearch-版本整理/" itemprop="url">
+                  springboot-data-elasticsearch 版本整理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-29 11:38:00 / Modified: 13:31:43" itemprop="dateCreated datePublished" datetime="2018-09-29T11:38:00+08:00">2018-09-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/springboot/" itemprop="url" rel="index"><span itemprop="name">springboot</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/09/29/springboot-data-elasticsearch-版本整理/" class="leancloud_visitors" data-flag-title="springboot-data-elasticsearch 版本整理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views: </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>日常开发中，习惯了使用 Spring 全家桶，其中 Spring Data 更是简化了各种类型数据的访问，不论是 JDBC、Redis还是Elasticsearch。不过由于Elasticsearch 存在着严重的版本不兼容问题，我们在开发时需要仔细核对 spring-data-elasticsearch 与 elasticsearch 的版本对应关系：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">springboot-starter</th>
+<th style="text-align:left">spring-boot-starter-data-elasticsearch</th>
+<th style="text-align:left">spring-data-elasticsearch</th>
+<th style="text-align:left">elasticsearch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">3.1.0.RELEASE</td>
+<td style="text-align:left">6.2.2</td>
+</tr>
+<tr>
+<td style="text-align:left">2.0.5.RELEASE</td>
+<td style="text-align:left">2.0.5.RELEASE</td>
+<td style="text-align:left">3.0.10.RELEASE</td>
+<td style="text-align:left">5.6.11</td>
+</tr>
+<tr>
+<td style="text-align:left">2.0.4.RELEASE</td>
+<td style="text-align:left">2.0.4.RELEASE</td>
+<td style="text-align:left">3.0.9.RELEASE</td>
+<td style="text-align:left">5.5.0</td>
+</tr>
+<tr>
+<td style="text-align:left">2.0.3.RELEASE</td>
+<td style="text-align:left">2.0.3.RELEASE</td>
+<td style="text-align:left">3.0.8.RELEASE</td>
+<td style="text-align:left">5.5.0</td>
+</tr>
+<tr>
+<td style="text-align:left">2.0.2.RELEASE</td>
+<td style="text-align:left">2.0.2.RELEASE</td>
+<td style="text-align:left">3.0.7.RELEASE</td>
+<td style="text-align:left">5.5.0</td>
+</tr>
+<tr>
+<td style="text-align:left">2.0.1.RELEASE</td>
+<td style="text-align:left">2.0.1.RELEASE</td>
+<td style="text-align:left">3.0.6.RELEASE</td>
+<td style="text-align:left">5.5.0</td>
+</tr>
+<tr>
+<td style="text-align:left">2.0.0.RELEASE</td>
+<td style="text-align:left">2.0.0.RELEASE</td>
+<td style="text-align:left">3.0.5.RELEASE</td>
+<td style="text-align:left">5.5.0</td>
+</tr>
+<tr>
+<td style="text-align:left">2.0.0.RELEASE</td>
+<td style="text-align:left">2.0.0.RELEASE</td>
+<td style="text-align:left">3.0.5.RELEASE</td>
+<td style="text-align:left">5.5.0</td>
+</tr>
+<tr>
+<td style="text-align:left">1.5.16.RELEASE</td>
+<td style="text-align:left">1.5.16.RELEASE</td>
+<td style="text-align:left">2.1.15.RELEASE</td>
+<td style="text-align:left">2.4.6</td>
+</tr>
+<tr>
+<td style="text-align:left">1.5.0.RELEASE</td>
+<td style="text-align:left">1.5.0.RELEASE</td>
+<td style="text-align:left">2.1.0.RELEASE</td>
+<td style="text-align:left">2.4.4</td>
+</tr>
+<tr>
+<td style="text-align:left">1.4.1.RELEASE</td>
+<td style="text-align:left">1.5.0.RELEASE</td>
+<td style="text-align:left">2.0.3.RELEASE</td>
+<td style="text-align:left">2.4.0</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2018/08/31/数据库事务/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -692,7 +939,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -707,12 +954,33 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">categories</span>
                   
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
               
             </nav>
           

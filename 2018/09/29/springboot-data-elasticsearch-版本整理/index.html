@@ -108,14 +108,18 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Github">
-<meta property="og:url" content="https://shucunbin.github.io/Github/index.html">
+  <meta name="description" content="日常开发中，习惯了使用 Spring 全家桶，其中 Spring Data 更是简化了各种类型数据的访问，不论是 JDBC、Redis还是Elasticsearch。不过由于Elasticsearch 存在着严重的版本不兼容问题，我们在开发时需要仔细核对 spring-data-elasticsearch 与 elasticsearch 的版本对应关系：    springboot-starter">
+<meta name="keywords" content="springboot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springboot-data-elasticsearch 版本整理">
+<meta property="og:url" content="https://shucunbin.github.io/2018/09/29/springboot-data-elasticsearch-版本整理/index.html">
 <meta property="og:site_name" content="shucunbin&#39;s blog">
+<meta property="og:description" content="日常开发中，习惯了使用 Spring 全家桶，其中 Spring Data 更是简化了各种类型数据的访问，不论是 JDBC、Redis还是Elasticsearch。不过由于Elasticsearch 存在着严重的版本不兼容问题，我们在开发时需要仔细核对 spring-data-elasticsearch 与 elasticsearch 的版本对应关系：    springboot-starter">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-16T06:26:12.504Z">
+<meta property="og:updated_time" content="2018-09-29T05:31:43.491Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Github">
+<meta name="twitter:title" content="springboot-data-elasticsearch 版本整理">
+<meta name="twitter:description" content="日常开发中，习惯了使用 Spring 全家桶，其中 Spring Data 更是简化了各种类型数据的访问，不论是 JDBC、Redis还是Elasticsearch。不过由于Elasticsearch 存在着严重的版本不兼容问题，我们在开发时需要仔细核对 spring-data-elasticsearch 与 elasticsearch 的版本对应关系：    springboot-starter">
 
 
 
@@ -124,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="https://shucunbin.github.io/Github/"/>
+  <link rel="canonical" href="https://shucunbin.github.io/2018/09/29/springboot-data-elasticsearch-版本整理/"/>
 
 
 
@@ -134,7 +138,7 @@
   };
 </script>
 
-  <title>Github | shucunbin's blog</title>
+  <title>springboot-data-elasticsearch 版本整理 | shucunbin's blog</title>
   
 
 
@@ -239,19 +243,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -278,43 +269,265 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2018/09/29/springboot-data-elasticsearch-版本整理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cunbin.shu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shucunbin's blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">Github</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
+          <h1 class="post-title" itemprop="name headline">springboot-data-elasticsearch 版本整理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-29 11:38:00 / Modified: 13:31:43" itemprop="dateCreated datePublished" datetime="2018-09-29T11:38:00+08:00">2018-09-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
           
-        
-      </div>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/springboot/" itemprop="url" rel="index"><span itemprop="name">springboot</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/09/29/springboot-data-elasticsearch-版本整理/" class="leancloud_visitors" data-flag-title="springboot-data-elasticsearch 版本整理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views: </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>日常开发中，习惯了使用 Spring 全家桶，其中 Spring Data 更是简化了各种类型数据的访问，不论是 JDBC、Redis还是Elasticsearch。不过由于Elasticsearch 存在着严重的版本不兼容问题，我们在开发时需要仔细核对 spring-data-elasticsearch 与 elasticsearch 的版本对应关系：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">springboot-starter</th>
+<th style="text-align:left">spring-boot-starter-data-elasticsearch</th>
+<th style="text-align:left">spring-data-elasticsearch</th>
+<th style="text-align:left">elasticsearch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">3.1.0.RELEASE</td>
+<td style="text-align:left">6.2.2</td>
+</tr>
+<tr>
+<td style="text-align:left">2.0.5.RELEASE</td>
+<td style="text-align:left">2.0.5.RELEASE</td>
+<td style="text-align:left">3.0.10.RELEASE</td>
+<td style="text-align:left">5.6.11</td>
+</tr>
+<tr>
+<td style="text-align:left">2.0.4.RELEASE</td>
+<td style="text-align:left">2.0.4.RELEASE</td>
+<td style="text-align:left">3.0.9.RELEASE</td>
+<td style="text-align:left">5.5.0</td>
+</tr>
+<tr>
+<td style="text-align:left">2.0.3.RELEASE</td>
+<td style="text-align:left">2.0.3.RELEASE</td>
+<td style="text-align:left">3.0.8.RELEASE</td>
+<td style="text-align:left">5.5.0</td>
+</tr>
+<tr>
+<td style="text-align:left">2.0.2.RELEASE</td>
+<td style="text-align:left">2.0.2.RELEASE</td>
+<td style="text-align:left">3.0.7.RELEASE</td>
+<td style="text-align:left">5.5.0</td>
+</tr>
+<tr>
+<td style="text-align:left">2.0.1.RELEASE</td>
+<td style="text-align:left">2.0.1.RELEASE</td>
+<td style="text-align:left">3.0.6.RELEASE</td>
+<td style="text-align:left">5.5.0</td>
+</tr>
+<tr>
+<td style="text-align:left">2.0.0.RELEASE</td>
+<td style="text-align:left">2.0.0.RELEASE</td>
+<td style="text-align:left">3.0.5.RELEASE</td>
+<td style="text-align:left">5.5.0</td>
+</tr>
+<tr>
+<td style="text-align:left">2.0.0.RELEASE</td>
+<td style="text-align:left">2.0.0.RELEASE</td>
+<td style="text-align:left">3.0.5.RELEASE</td>
+<td style="text-align:left">5.5.0</td>
+</tr>
+<tr>
+<td style="text-align:left">1.5.16.RELEASE</td>
+<td style="text-align:left">1.5.16.RELEASE</td>
+<td style="text-align:left">2.1.15.RELEASE</td>
+<td style="text-align:left">2.4.6</td>
+</tr>
+<tr>
+<td style="text-align:left">1.5.0.RELEASE</td>
+<td style="text-align:left">1.5.0.RELEASE</td>
+<td style="text-align:left">2.1.0.RELEASE</td>
+<td style="text-align:left">2.4.4</td>
+</tr>
+<tr>
+<td style="text-align:left">1.4.1.RELEASE</td>
+<td style="text-align:left">1.5.0.RELEASE</td>
+<td style="text-align:left">2.0.3.RELEASE</td>
+<td style="text-align:left">2.4.0</td>
+</tr>
+</tbody>
+</table>
+
       
     </div>
-    
-
-
 
     
+
     
     
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/springboot/" rel="tag"># springboot</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/31/数据库事务/" rel="next" title="Java 事务管理（一）">
+                <i class="fa fa-chevron-left"></i> Java 事务管理（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
@@ -599,43 +812,42 @@
   
   <script>
     
-    function showTime(Counter) {
-      var entries = [];
+    function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
 
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { "$in": entries } }) })
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
         .done(function ({ results }) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.url;
-            var time = item.time;
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
           }
         })
-        .fail(function ({ responseJSON }) {
-          console.log("LeanCloud Counter Error: " + responseJSON.code + " " + responseJSON.error);
-        });
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
     }
     
 
@@ -655,9 +867,7 @@
             });
           };
           
-          if ($('.post-title-link').length >= 1) {
-            showTime(Counter);
-          }
+          addCount(Counter);
           
         })
     });
