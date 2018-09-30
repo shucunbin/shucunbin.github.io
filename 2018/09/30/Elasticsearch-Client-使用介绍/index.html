@@ -108,18 +108,17 @@
 
 
 
-  <meta name="description" content="日常开发中，习惯了使用 Spring 全家桶，其中 Spring Data 更是简化了各种类型数据的访问，不论是 jdbc、redis 还是 elasticsearch。对于 elasticsearch 而言，在使用的 api 版本上有一些特殊的要求，其官网文档上要求 elasticsearch java api 版本必须与连接的 elasticsearch 节点主版本一致。  The clien">
-<meta name="keywords" content="elasticsearch,springboot">
+  <meta name="description" content="基本概念Elasticsearch Client 指的是 Elasticsearch 的 Java API 所提供的客户端，我们以多种方式使用 Client：  在已有的集群上执行标准的 index、get、delete、search 操作 在正在运行的集群上执行管理任务  获取 Elasticsearch Client 很简单，最常用的方式是创建TransportClient实例。Transpo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springboot-data-elasticsearch 版本整理">
-<meta property="og:url" content="https://shucunbin.github.io/2018/09/29/springboot-data-elasticsearch-版本整理/index.html">
+<meta property="og:title" content="Elasticsearch Client 使用介绍">
+<meta property="og:url" content="https://shucunbin.github.io/2018/09/30/Elasticsearch-Client-使用介绍/index.html">
 <meta property="og:site_name" content="shucunbin&#39;s blog">
-<meta property="og:description" content="日常开发中，习惯了使用 Spring 全家桶，其中 Spring Data 更是简化了各种类型数据的访问，不论是 jdbc、redis 还是 elasticsearch。对于 elasticsearch 而言，在使用的 api 版本上有一些特殊的要求，其官网文档上要求 elasticsearch java api 版本必须与连接的 elasticsearch 节点主版本一致。  The clien">
+<meta property="og:description" content="基本概念Elasticsearch Client 指的是 Elasticsearch 的 Java API 所提供的客户端，我们以多种方式使用 Client：  在已有的集群上执行标准的 index、get、delete、search 操作 在正在运行的集群上执行管理任务  获取 Elasticsearch Client 很简单，最常用的方式是创建TransportClient实例。Transpo">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-30T05:33:00.976Z">
+<meta property="og:updated_time" content="2018-09-30T07:09:49.209Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="springboot-data-elasticsearch 版本整理">
-<meta name="twitter:description" content="日常开发中，习惯了使用 Spring 全家桶，其中 Spring Data 更是简化了各种类型数据的访问，不论是 jdbc、redis 还是 elasticsearch。对于 elasticsearch 而言，在使用的 api 版本上有一些特殊的要求，其官网文档上要求 elasticsearch java api 版本必须与连接的 elasticsearch 节点主版本一致。  The clien">
+<meta name="twitter:title" content="Elasticsearch Client 使用介绍">
+<meta name="twitter:description" content="基本概念Elasticsearch Client 指的是 Elasticsearch 的 Java API 所提供的客户端，我们以多种方式使用 Client：  在已有的集群上执行标准的 index、get、delete、search 操作 在正在运行的集群上执行管理任务  获取 Elasticsearch Client 很简单，最常用的方式是创建TransportClient实例。Transpo">
 
 
 
@@ -128,7 +127,7 @@
 
 
 
-  <link rel="canonical" href="https://shucunbin.github.io/2018/09/29/springboot-data-elasticsearch-版本整理/"/>
+  <link rel="canonical" href="https://shucunbin.github.io/2018/09/30/Elasticsearch-Client-使用介绍/"/>
 
 
 
@@ -138,7 +137,7 @@
   };
 </script>
 
-  <title>springboot-data-elasticsearch 版本整理 | shucunbin's blog</title>
+  <title>Elasticsearch Client 使用介绍 | shucunbin's blog</title>
   
 
 
@@ -283,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2018/09/29/springboot-data-elasticsearch-版本整理/">
+    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2018/09/30/Elasticsearch-Client-使用介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cunbin.shu">
@@ -300,7 +299,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">springboot-data-elasticsearch 版本整理
+          <h1 class="post-title" itemprop="name headline">Elasticsearch Client 使用介绍
               
             
           </h1>
@@ -325,24 +324,12 @@
                 
               
 
-              <time title="Created: 2018-09-29 11:38:00" itemprop="dateCreated datePublished" datetime="2018-09-29T11:38:00+08:00">2018-09-29</time>
+              <time title="Created: 2018-09-30 15:00:00 / Modified: 15:09:49" itemprop="dateCreated datePublished" datetime="2018-09-30T15:00:00+08:00">2018-09-30</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-09-30 13:33:00" itemprop="dateModified" datetime="2018-09-30T13:33:00+08:00">2018-09-30</time>
               
             
           </span>
@@ -373,7 +360,7 @@
 
           
           
-             <span id="/2018/09/29/springboot-data-elasticsearch-版本整理/" class="leancloud_visitors" data-flag-title="springboot-data-elasticsearch 版本整理">
+             <span id="/2018/09/30/Elasticsearch-Client-使用介绍/" class="leancloud_visitors" data-flag-title="Elasticsearch Client 使用介绍">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -404,83 +391,70 @@
       
 
       
-        <p>日常开发中，习惯了使用 Spring 全家桶，其中 Spring Data 更是简化了各种类型数据的访问，不论是 jdbc、redis 还是 elasticsearch。对于 elasticsearch 而言，在使用的 api 版本上有一些特殊的要求，其官网文档上要求 elasticsearch java api 版本必须与连接的 elasticsearch 节点<strong>主版本</strong>一致。</p>
-<blockquote>
-<p>The client must have the same major version (e.g. 2.x, or 5.x) as the nodes in the cluster. Clients may connect to clusters which have a different minor version (e.g. 2.3.x) but it is possible that new functionality may not be supported. Ideally, the client should have the same version as the cluster.</p>
-</blockquote>
-<p>因此，我们在开发时需要仔细核对 spring-data-elasticsearch 与 elasticsearch 的版本对应关系：<br><a id="more"></a></p>
+        <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>Elasticsearch Client 指的是 Elasticsearch 的 Java API 所提供的客户端，我们以多种方式使用 Client：</p>
+<ul>
+<li>在已有的集群上执行标准的 index、get、delete、search 操作</li>
+<li>在正在运行的集群上执行管理任务</li>
+</ul>
+<p>获取 Elasticsearch Client 很简单，最常用的方式是创建<code>TransportClient</code>实例。TransportClient使用transport模块远程连接到Elasticsearch集群，它自身不加入集群，而是简单地获取一个或多个初始传输地址，并在每个操作上以轮询的方式与集群通信。</p>
+<p>需要注意的是官方文档中说明6.x及其以下版本可以正常使用 TransportClient，在 7.x 会将其废弃，而到8.x则会彻底废除，因此在使用需要注意 Elasticsearch 客户端 API 的版本以及后续的迁移计划。</p>
+<h3 id="实践示例"><a href="#实践示例" class="headerlink" title="实践示例"></a>实践示例</h3><p>一个简单的创建 TransportClient 的例子：</p>
+<pre>
+TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
+        .addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"),9300));
+
+// do something...
+
+client.close();
+</pre>
+
+<p>上面的例子中，我们使用了默认的配置，它假设连接的目标集群的名称为<code>elasticsearch</code>，如果需要使用自定义的集群名称，则须显示设置：</p>
+<pre>
+Settings settings = Settings.builder()
+        .put("cluster.name", "myClusterName").build();
+TransportClient client = new PreBuiltTransportClient(settings);
+</pre>
+
+<p>如果无法知道确定所使用的名称，也可以设置忽略集群名称：</p>
+<pre>
+Settings settings = Settings.builder()
+        .put("client.transport.ignore_cluster_name",true).build();
+TransportClient client = new PreBuiltTransportClient(settings);
+</pre>
+
+<p>常用的客户端级别的配置项汇总：</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">springboot-starter</th>
-<th style="text-align:left">spring-boot-starter-data-elasticsearch</th>
-<th style="text-align:left">spring-data-elasticsearch</th>
-<th style="text-align:left">elasticsearch</th>
+<th style="text-align:left">参数名</th>
+<th style="text-align:left">说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">-</td>
-<td style="text-align:left">-</td>
-<td style="text-align:left">3.1.0.RELEASE</td>
-<td style="text-align:left">6.2.2</td>
+<td style="text-align:left">cluster.name</td>
+<td style="text-align:left">目标集群名称</td>
 </tr>
 <tr>
-<td style="text-align:left">2.0.5.RELEASE</td>
-<td style="text-align:left">2.0.5.RELEASE</td>
-<td style="text-align:left">3.0.10.RELEASE</td>
-<td style="text-align:left">5.6.11</td>
+<td style="text-align:left">client.transport.ignore_cluster_name</td>
+<td style="text-align:left">忽略目标集群名称</td>
 </tr>
 <tr>
-<td style="text-align:left">2.0.4.RELEASE</td>
-<td style="text-align:left">2.0.4.RELEASE</td>
-<td style="text-align:left">3.0.9.RELEASE</td>
-<td style="text-align:left">5.6.10</td>
+<td style="text-align:left">client.transport.sniff</td>
+<td style="text-align:left">客户端是否自动嗅探集群节点</td>
 </tr>
 <tr>
-<td style="text-align:left">2.0.3.RELEASE</td>
-<td style="text-align:left">2.0.3.RELEASE</td>
-<td style="text-align:left">3.0.8.RELEASE</td>
-<td style="text-align:left">5.6.10</td>
+<td style="text-align:left">client.transport.ping_timeout</td>
+<td style="text-align:left">客户端 ping 集群节点并等待其响应的超时时间，默认为 5 秒，结合client.transport.sniff使用</td>
 </tr>
 <tr>
-<td style="text-align:left">2.0.2.RELEASE</td>
-<td style="text-align:left">2.0.2.RELEASE</td>
-<td style="text-align:left">3.0.7.RELEASE</td>
-<td style="text-align:left">5.6.9</td>
-</tr>
-<tr>
-<td style="text-align:left">2.0.1.RELEASE</td>
-<td style="text-align:left">2.0.1.RELEASE</td>
-<td style="text-align:left">3.0.6.RELEASE</td>
-<td style="text-align:left">5.6.8</td>
-</tr>
-<tr>
-<td style="text-align:left">2.0.0.RELEASE</td>
-<td style="text-align:left">2.0.0.RELEASE</td>
-<td style="text-align:left">3.0.5.RELEASE</td>
-<td style="text-align:left">5.6.8</td>
-</tr>
-<tr>
-<td style="text-align:left">1.5.16.RELEASE</td>
-<td style="text-align:left">1.5.16.RELEASE</td>
-<td style="text-align:left">2.1.15.RELEASE</td>
-<td style="text-align:left">2.4.6</td>
-</tr>
-<tr>
-<td style="text-align:left">1.5.0.RELEASE</td>
-<td style="text-align:left">1.5.0.RELEASE</td>
-<td style="text-align:left">2.1.0.RELEASE</td>
-<td style="text-align:left">2.4.4</td>
-</tr>
-<tr>
-<td style="text-align:left">1.4.1.RELEASE</td>
-<td style="text-align:left">1.5.0.RELEASE</td>
-<td style="text-align:left">2.0.3.RELEASE</td>
-<td style="text-align:left">2.4.0</td>
+<td style="text-align:left">client.transport.nodes_sampler_interval</td>
+<td style="text-align:left">对列出和连接的节点进行 ping 采样的频率，默认为 5 秒，结合client.transport.sniff使用</td>
 </tr>
 </tbody>
 </table>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/6.1/client.html" target="_blank" rel="noopener">Java API 6.1 | Elastic</a></p>
+<p><a href="https://www.aliyun.com/zixun/wenji/1222911.html" target="_blank" rel="noopener">elasticsearch中client.transport.sniff的使用方法和注意事项</a></p>
 
       
     </div>
@@ -499,14 +473,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/elasticsearch/" rel="tag"># elasticsearch</a>
-          
-            <a href="/tags/springboot/" rel="tag"># springboot</a>
-          
-        </div>
-      
 
       
       
@@ -516,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/31/数据库事务/" rel="next" title="Java 事务管理（一）">
-                <i class="fa fa-chevron-left"></i> Java 事务管理（一）
+              <a href="/2018/09/29/springboot-data-elasticsearch-版本整理/" rel="next" title="springboot-data-elasticsearch 版本整理">
+                <i class="fa fa-chevron-left"></i> springboot-data-elasticsearch 版本整理
               </a>
             
           </div>
@@ -525,10 +491,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/30/Elasticsearch-Client-使用介绍/" rel="prev" title="Elasticsearch Client 使用介绍">
-                Elasticsearch Client 使用介绍 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -573,8 +535,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -662,6 +633,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实践示例"><span class="nav-number">2.</span> <span class="nav-text">实践示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">3.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
