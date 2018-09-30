@@ -325,12 +325,24 @@
                 
               
 
-              <time title="Created: 2018-09-29 11:38:00 / Modified: 14:18:05" itemprop="dateCreated datePublished" datetime="2018-09-29T11:38:00+08:00">2018-09-29</time>
+              <time title="Created: 2018-09-29 11:38:00" itemprop="dateCreated datePublished" datetime="2018-09-29T11:38:00+08:00">2018-09-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-09-30 09:01:01" itemprop="dateModified" datetime="2018-09-30T09:01:01+08:00">2018-09-30</time>
               
             
           </span>
@@ -393,7 +405,11 @@
 
       
         
-          <p>日常开发中，习惯了使用 Spring 全家桶，其中 Spring Data 更是简化了各种类型数据的访问，不论是 JDBC、Redis还是Elasticsearch。不过由于Elasticsearch 存在着严重的版本不兼容问题，我们在开发时需要仔细核对 spring-data-elasticsearch 与 elasticsearch 的版本对应关系：<br>
+          <p>日常开发中，习惯了使用 Spring 全家桶，其中 Spring Data 更是简化了各种类型数据的访问，不论是 jdbc、redis 还是 elasticsearch。对于 elasticsearch 而言，在使用的 api 版本上有一些特殊的要求，其官网文档上要求 elasticsearch java api 版本必须与连接的 elasticsearch 节点<strong>主版本</strong>一致。</p>
+<blockquote>
+<p>The client must have the same major version (e.g. 2.x, or 5.x) as the nodes in the cluster. Clients may connect to clusters which have a different minor version (e.g. 2.3.x) but it is possible that new functionality may not be supported. Ideally, the client should have the same version as the cluster.</p>
+</blockquote>
+<p>因此，我们在开发时需要仔细核对 spring-data-elasticsearch 与 elasticsearch 的版本对应关系：<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/09/29/springboot-data-elasticsearch-版本整理/#more" rel="contents">
