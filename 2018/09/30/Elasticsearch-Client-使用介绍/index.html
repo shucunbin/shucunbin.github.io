@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="shucunbin&#39;s blog">
 <meta property="og:description" content="基本概念Elasticsearch Client 指的是 Elasticsearch 的 Java API 所提供的客户端，我们以多种方式使用 Client：  在已有的集群上执行标准的 index、get、delete、search 操作 在正在运行的集群上执行管理任务  获取 Elasticsearch Client 很简单，最常用的方式是创建TransportClient实例。Transpo">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-30T07:09:49.209Z">
+<meta property="og:updated_time" content="2018-09-30T07:20:48.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elasticsearch Client 使用介绍">
 <meta name="twitter:description" content="基本概念Elasticsearch Client 指的是 Elasticsearch 的 Java API 所提供的客户端，我们以多种方式使用 Client：  在已有的集群上执行标准的 index、get、delete、search 操作 在正在运行的集群上执行管理任务  获取 Elasticsearch Client 很简单，最常用的方式是创建TransportClient实例。Transpo">
@@ -324,7 +324,7 @@
                 
               
 
-              <time title="Created: 2018-09-30 15:00:00 / Modified: 15:09:49" itemprop="dateCreated datePublished" datetime="2018-09-30T15:00:00+08:00">2018-09-30</time>
+              <time title="Created: 2018-09-30 15:00:00 / Modified: 15:20:48" itemprop="dateCreated datePublished" datetime="2018-09-30T15:00:00+08:00">2018-09-30</time>
             
 
             
@@ -396,8 +396,8 @@
 <li>在已有的集群上执行标准的 index、get、delete、search 操作</li>
 <li>在正在运行的集群上执行管理任务</li>
 </ul>
-<p>获取 Elasticsearch Client 很简单，最常用的方式是创建<code>TransportClient</code>实例。TransportClient使用transport模块远程连接到Elasticsearch集群，它自身不加入集群，而是简单地获取一个或多个初始传输地址，并在每个操作上以轮询的方式与集群通信。</p>
-<p>需要注意的是官方文档中说明6.x及其以下版本可以正常使用 TransportClient，在 7.x 会将其废弃，而到8.x则会彻底废除，因此在使用需要注意 Elasticsearch 客户端 API 的版本以及后续的迁移计划。</p>
+<p>获取 Elasticsearch Client 很简单，最常用的方式是创建<code>TransportClient</code>实例。TransportClient 使用 transport 模块远程连接到 Elasticsearch 集群，它自身不加入集群，而是简单地获取一个或多个初始传输地址，并在每个操作上以轮询的方式与集群通信。</p>
+<p>需要注意的是官方文档中说明 6.x 及其以下版本可以正常使用 TransportClient，在 7.x 会将其废弃，而到 8.x 则会彻底废除，因此在使用需要注意 Elasticsearch 客户端 API 的版本以及后续的迁移计划。<br><a id="more"></a></p>
 <h3 id="实践示例"><a href="#实践示例" class="headerlink" title="实践示例"></a>实践示例</h3><p>一个简单的创建 TransportClient 的例子：</p>
 <pre>
 TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
