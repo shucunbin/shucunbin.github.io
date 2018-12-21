@@ -333,12 +333,24 @@
                 
               
 
-              <time title="Created: 2018-11-29 14:24:00 / Modified: 17:01:26" itemprop="dateCreated datePublished" datetime="2018-11-29T14:24:00+08:00">2018-11-29</time>
+              <time title="Created: 2018-11-29 14:24:00" itemprop="dateCreated datePublished" datetime="2018-11-29T14:24:00+08:00">2018-11-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-21 11:41:53" itemprop="dateModified" datetime="2018-12-21T11:41:53+08:00">2018-12-21</time>
               
             
           </span>
@@ -402,6 +414,7 @@
       
         
           <h1 id="JDBC-对事务的支持"><a href="#JDBC-对事务的支持" class="headerlink" title="JDBC 对事务的支持"></a>JDBC 对事务的支持</h1><p>在使用 JDBC API 进行事务操作前，我们可以通过特定的 API 判断当前数据库是否支持事务、是否支持的相应的事务隔离级别以及是否支持保存点，代码片段如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Connection connection = getConnection();</span><br><span class="line">DatabaseMetaData metaData = connection.getMetaData();</span><br><span class="line"></span><br><span class="line">metaData.supportsTransactions();</span><br><span class="line">metaData.supportsTransactionIsolationLevel(TRANSACTION_READ_UNCOMMITTED);</span><br><span class="line">metaData.supportsTransactionIsolationLevel(TRANSACTION_READ_COMMITTED);</span><br><span class="line">metaData.supportsTransactionIsolationLevel(TRANSACTION_REPEATABLE_READ);</span><br><span class="line">metaData.supportsTransactionIsolationLevel(TRANSACTION_SERIALIZABLE);</span><br><span class="line">metaData.supportsSavepoints()</span><br></pre></td></tr></table></figure></p>
+<p>在 JDBC 2.0 中，事务最终只能有两个操作：提交或回滚，简单的代码片段如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Connection conn = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    conn = getConnection();</span><br><span class="line">    conn.setAutoCommit(<span class="keyword">false</span>);</span><br><span class="line">    <span class="comment">// Connection类中定义了 4 个与 SQL 92 标准对应的隔离级别常量</span></span><br><span class="line">    conn.setTransactionIsolation(TRANSACTION_READ_COMMITTED);</span><br><span class="line"></span><br><span class="line">    Statement stmt = conn.createStatement();</span><br><span class="line">    stmt.executeUpdate(<span class="string">"insert into user(name,age) values ('lisi',11)"</span>);</span><br><span class="line">    stmt.executeUpdate(<span class="string">"insert into user(name,age) values ('wangwu',22)"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 提交事务</span></span><br><span class="line">    conn.commit();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">	<span class="comment">// 回滚事务</span></span><br><span class="line">	conn.rollback();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/11/29/Java-事务管理（二）/#more" rel="contents">
