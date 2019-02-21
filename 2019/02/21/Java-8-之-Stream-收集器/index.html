@@ -117,7 +117,7 @@
 <meta property="og:site_name" content="shucunbin&#39;s blog">
 <meta property="og:description" content="概述收集器，一种通用的、从流生成复杂值的结构。只要将它传给 collect方法，所有流都可以使用它。本文将介绍标准类库里提供的常用收集器及其它们的组合使用方式，以此简化某些代码的编写方式。此外，收集器框架也提供了非常通用的API，供我们定制自己的收集器，不过在决定实现收集器之前，应仔细阅读 API 文档是否已存在满足条件的收集器，避免重复造轮子。 标准类库里的收集器对Collectors里常用的收">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-21T08:26:49.804Z">
+<meta property="og:updated_time" content="2019-02-21T08:27:33.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 8 之 Stream 收集器">
 <meta name="twitter:description" content="概述收集器，一种通用的、从流生成复杂值的结构。只要将它传给 collect方法，所有流都可以使用它。本文将介绍标准类库里提供的常用收集器及其它们的组合使用方式，以此简化某些代码的编写方式。此外，收集器框架也提供了非常通用的API，供我们定制自己的收集器，不过在决定实现收集器之前，应仔细阅读 API 文档是否已存在满足条件的收集器，避免重复造轮子。 标准类库里的收集器对Collectors里常用的收">
@@ -334,7 +334,7 @@
                 
               
 
-              <time title="Created: 2019-02-21 16:22:00 / Modified: 16:26:49" itemprop="dateCreated datePublished" datetime="2019-02-21T16:22:00+08:00">2019-02-21</time>
+              <time title="Created: 2019-02-21 16:22:00 / Modified: 16:27:33" itemprop="dateCreated datePublished" datetime="2019-02-21T16:22:00+08:00">2019-02-21</time>
             
 
             
@@ -414,6 +414,7 @@
 </ul>
 <p>下面是一个组合收集器的使用例子：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用收集器求每个艺术家的专辑名</span></span><br><span class="line"><span class="keyword">public</span> Map&lt;Artist, List&lt;String&gt;&gt; nameOfAlbums(Stream&lt;Album&gt; albums) &#123;</span><br><span class="line">    <span class="keyword">return</span> albums.collect(groupingBy(Album::getMainMusician,</span><br><span class="line">                                     mapping(Album::getName, toList())));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="自定义收集器"><a href="#自定义收集器" class="headerlink" title="自定义收集器"></a>自定义收集器</h3><p>如果你有自己特定领域内的类，希望从集合中构建一个操作，而标准的集合类并没有提供这种操作时，就需要定制自己的收集器。首先我们看一下<code>Collector</code>的接口定义：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Collector</span>&lt;<span class="title">T</span>, <span class="title">A</span>, <span class="title">R</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">// 创建初始容器</span></span><br><span class="line">    <span class="function">Supplier&lt;A&gt; <span class="title">supplier</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">// 将流中的元素经过处理后，累加到初始容器中</span></span><br><span class="line">    <span class="function">BiConsumer&lt;A,T&gt; <span class="title">accumulator</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">// 多个容器进行合并</span></span><br><span class="line">    <span class="function">BinaryOperator&lt;A&gt; <span class="title">combiner</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">// 将容器中的内容转换为最终想要的结果</span></span><br><span class="line">    <span class="function">Function&lt;A,R&gt; <span class="title">finisher</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">// 特征是一组描述收集器的对象，框架可以对其适当优化</span></span><br><span class="line">    <span class="function">Set&lt;Characteristics&gt; <span class="title">characteristics</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
