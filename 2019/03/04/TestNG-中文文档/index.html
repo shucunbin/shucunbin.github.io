@@ -109,13 +109,18 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="shucunbin&#39;s blog">
-<meta property="og:url" content="https://shucunbin.github.io/index.html">
+  <meta name="description" content="翻译自 TestNG 英文文档 1 - 概述TestNG 是一个被设计用来简化广泛的测试需求的测试框架，它既可应用于单元测试（测试一个独立的类）可以用于集成测试（测试一个完整的系统，这个系统可能由多个类、多个包甚至多个外部框架组成，比如多个应用服务）。 使用 TestNG 完成一次测试通常需要 3 个步骤：  在你的代码里书写测试业务逻辑并加入 TestNG 注解. 将你的测试信息（例如：你希望运">
+<meta name="keywords" content="testng">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TestNG 中文文档（翻译）">
+<meta property="og:url" content="https://shucunbin.github.io/2019/03/04/TestNG-中文文档/index.html">
 <meta property="og:site_name" content="shucunbin&#39;s blog">
+<meta property="og:description" content="翻译自 TestNG 英文文档 1 - 概述TestNG 是一个被设计用来简化广泛的测试需求的测试框架，它既可应用于单元测试（测试一个独立的类）可以用于集成测试（测试一个完整的系统，这个系统可能由多个类、多个包甚至多个外部框架组成，比如多个应用服务）。 使用 TestNG 完成一次测试通常需要 3 个步骤：  在你的代码里书写测试业务逻辑并加入 TestNG 注解. 将你的测试信息（例如：你希望运">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-04T09:58:16.629Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="shucunbin&#39;s blog">
+<meta name="twitter:title" content="TestNG 中文文档（翻译）">
+<meta name="twitter:description" content="翻译自 TestNG 英文文档 1 - 概述TestNG 是一个被设计用来简化广泛的测试需求的测试框架，它既可应用于单元测试（测试一个独立的类）可以用于集成测试（测试一个完整的系统，这个系统可能由多个类、多个包甚至多个外部框架组成，比如多个应用服务）。 使用 TestNG 完成一次测试通常需要 3 个步骤：  在你的代码里书写测试业务逻辑并加入 TestNG 注解. 将你的测试信息（例如：你希望运">
 
 
 
@@ -124,7 +129,7 @@
 
 
 
-  <link rel="canonical" href="https://shucunbin.github.io/"/>
+  <link rel="canonical" href="https://shucunbin.github.io/2019/03/04/TestNG-中文文档/"/>
 
 
 
@@ -134,7 +139,7 @@
   };
 </script>
 
-  <title>shucunbin's blog</title>
+  <title>TestNG 中文文档（翻译） | shucunbin's blog</title>
   
 
 
@@ -181,8 +186,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -219,7 +223,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
     <a href="/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
   </li>
@@ -271,9 +275,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -305,11 +309,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/04/TestNG-中文文档/" itemprop="url">
-                  TestNG 中文文档（翻译）
-                </a>
+          <h1 class="post-title" itemprop="name headline">TestNG 中文文档（翻译）
               
             
           </h1>
@@ -401,9 +401,7 @@
       
 
       
-        
-          
-            <p>翻译自 <a href="http://testng.org/doc/documentation-main.html" target="_blank" rel="noopener">TestNG 英文文档</a></p>
+        <p>翻译自 <a href="http://testng.org/doc/documentation-main.html" target="_blank" rel="noopener">TestNG 英文文档</a></p>
 <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1 - 概述"></a>1 - 概述</h3><p>TestNG 是一个被设计用来简化广泛的测试需求的测试框架，它既可应用于<strong>单元测试</strong>（测试一个独立的类）可以用于<strong>集成测试</strong>（测试一个完整的系统，这个系统可能由多个类、多个包甚至多个外部框架组成，比如多个应用服务）。</p>
 <p>使用 TestNG 完成一次测试通常需要 3 个步骤：</p>
 <ul>
@@ -1118,8 +1116,6 @@
 <h5 id="6-2-2-Logging-Reporter"><a href="#6-2-2-Logging-Reporter" class="headerlink" title="6.2.2 Logging Reporter"></a>6.2.2 Logging Reporter</h5><p><a href="https://jitpack.io/com/github/cbeust/testng/master/javadoc/org/testng/IReporter.html" target="_blank" rel="noopener"><tt>org.testng.IReporter</tt></a>只有一个方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">generateReport</span><span class="params">(List&lt;ISuite&gt; suites, String outputDirectory)</span></span></span><br></pre></td></tr></table></figure></p>
 <p>当所有的测试套件都运行时，TestNG 将调用这个方法，你可以检查它的参数，以访问刚刚完成测试的信息。</p>
 <h5 id="6-2-3-JUnitReports"><a href="#6-2-3-JUnitReports" class="headerlink" title="6.2.3 JUnitReports"></a>6.2.3 JUnitReports</h5><h5 id="6-2-4-Reporter-API"><a href="#6-2-4-Reporter-API" class="headerlink" title="6.2.4 Reporter API"></a>6.2.4 Reporter API</h5><h5 id="6-2-5-XML-Reporter"><a href="#6-2-5-XML-Reporter" class="headerlink" title="6.2.5 XML Reporter"></a>6.2.5 XML Reporter</h5><h3 id="7-YAML"><a href="#7-YAML" class="headerlink" title="7 - YAML"></a>7 - YAML</h3>
-          
-        
       
     </div>
 
@@ -1137,380 +1133,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2019/02/21/Java-8-之-Stream-收集器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cunbin.shu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shucunbin's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/21/Java-8-之-Stream-收集器/" itemprop="url">
-                  Java 8 之 Stream 收集器
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-21 16:22:00 / Modified: 16:27:33" itemprop="dateCreated datePublished" datetime="2019-02-21T16:22:00+08:00">2019-02-21</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java-基础/" itemprop="url" rel="index"><span itemprop="name">Java 基础</span></a></span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/testng/" rel="tag"># testng</a>
           
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/02/21/Java-8-之-Stream-收集器/" class="leancloud_visitors" data-flag-title="Java 8 之 Stream 收集器">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Views: </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>收集器，一种通用的、<strong>从流生成复杂值</strong>的结构。只要将它传给 <code>collect</code>方法，所有流都可以使用它。本文将介绍标准类库里提供的常用收集器及其它们的组合使用方式，以此简化某些代码的编写方式。此外，收集器框架也提供了非常通用的API，供我们定制自己的收集器，不过在决定实现收集器之前，应仔细阅读 API 文档是否已存在满足条件的收集器，避免重复造轮子。</p>
-<h3 id="标准类库里的收集器"><a href="#标准类库里的收集器" class="headerlink" title="标准类库里的收集器"></a>标准类库里的收集器</h3><p>对<code>Collectors</code>里常用的收集器进行简单的分类，以助记忆使用：</p>
-<ul>
-<li>转换成其它集合：toList、toSet、toCollection、toMap、toConcurrentMap</li>
-<li>生成一个值：maxBy、minBy、counting、summingInt、averagingInt、summarizingInt，针对后面 3 种，还有 long、double 的重载版；</li>
-<li>数据分区：partitioningBy，这个收集器使用一个 <code>Predicate</code>对象将流分成两部分；</li>
-<li>数据分组：groupingBy，此收集器接受一个 <code>Function</code> 对象，用来对流进行分组，类似于 SQL 语句里的 group by 子句；</li>
-<li>针对 <code>String</code> 类的特殊收集器：joining，这个收集器用于拼接字符串，并可自定义前缀、分隔符、后缀；</li>
-<li>reducing：上述各种特殊收集器的一般化，即理论上可以使用 reducing 替换上面这些特殊的收集器；</li>
-<li>组合收集器：多个收集器可以进行组合使用</li>
-</ul>
-<p>下面是一个组合收集器的使用例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用收集器求每个艺术家的专辑名</span></span><br><span class="line"><span class="keyword">public</span> Map&lt;Artist, List&lt;String&gt;&gt; nameOfAlbums(Stream&lt;Album&gt; albums) &#123;</span><br><span class="line">    <span class="keyword">return</span> albums.collect(groupingBy(Album::getMainMusician,</span><br><span class="line">                                     mapping(Album::getName, toList())));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/02/21/Java-8-之-Stream-收集器/#more" rel="contents">
-              Read more &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/21/Java-8-之-Stream-收集器/" rel="next" title="Java 8 之 Stream 收集器">
+                <i class="fa fa-chevron-left"></i> Java 8 之 Stream 收集器
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2019/02/18/Java-8-之接口默认方法及静态方法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cunbin.shu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shucunbin's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/18/Java-8-之接口默认方法及静态方法/" itemprop="url">
-                  Java 8 之接口默认方法及静态方法
-                </a>
-              
+          <div class="post-nav-prev post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-18 17:12:00 / Modified: 17:17:46" itemprop="dateCreated datePublished" datetime="2019-02-18T17:12:00+08:00">2019-02-18</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java-基础/" itemprop="url" rel="index"><span itemprop="name">Java 基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/02/18/Java-8-之接口默认方法及静态方法/" class="leancloud_visitors" data-flag-title="Java 8 之接口默认方法及静态方法">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Views: </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>Java 8 新增了很多语言特性，其中涉及接口的有<strong>默认方法</strong>、<strong>静态方法</strong>，这些语言特性旨在帮助编写类库的开发人员，但对我们日常写应用程序的开发人员也同样适用。</p>
-<h2 id="默认方法"><a href="#默认方法" class="headerlink" title="默认方法"></a>默认方法</h2><p>默认方法，简而言之，就是在一个接口里使用 <code>default</code> 关键字定义的一个方法，所有该接口的实现类都可以直接使用而无须自己实现此方法。</p>
-<p>默认方法存在的主要目的是为了方便扩展已有接口，如果没有默认方法，给一个已经发布的接口添加方法时，所有实现改接口的地方都得做修改，如果该接口的使用范围很广，那相应的影响也非常之大，例如 JDK 里定义的各种接口。因此，Java 8 中加入了此语言特性使得类库设计人员可以很方便的扩展已有的接口。</p>
-<h3 id="重写规则"><a href="#重写规则" class="headerlink" title="重写规则"></a>重写规则</h3><p>实现包含默认方法的接口，有以下三种可能的方式：</p>
-<ul>
-<li>实现类不重写默认方法，直接使用接口中的默认方法；</li>
-<li>子接口或抽象类将默认方法声明为普通的抽象方法；</li>
-<li>实现类中重写默认方法，与重写普通的接口方法一样。</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/02/18/Java-8-之接口默认方法及静态方法/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1520,953 +1172,20 @@
   </article>
 
 
-    
-      
+  </div>
 
-  
 
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2018/11/29/Java-事务管理（二）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cunbin.shu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shucunbin's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/29/Java-事务管理（二）/" itemprop="url">
-                  Java 事务管理（二）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-11-29 14:24:00" itemprop="dateCreated datePublished" datetime="2018-11-29T14:24:00+08:00">2018-11-29</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-21 11:41:53" itemprop="dateModified" datetime="2018-12-21T11:41:53+08:00">2018-12-21</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java-基础/" itemprop="url" rel="index"><span itemprop="name">Java 基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/11/29/Java-事务管理（二）/" class="leancloud_visitors" data-flag-title="Java 事务管理（二）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Views: </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="JDBC-对事务的支持"><a href="#JDBC-对事务的支持" class="headerlink" title="JDBC 对事务的支持"></a>JDBC 对事务的支持</h1><p>在使用 JDBC API 进行事务操作前，我们可以通过特定的 API 判断当前数据库是否支持事务、是否支持的相应的事务隔离级别以及是否支持保存点，代码片段如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Connection connection = getConnection();</span><br><span class="line">DatabaseMetaData metaData = connection.getMetaData();</span><br><span class="line"></span><br><span class="line">metaData.supportsTransactions();</span><br><span class="line">metaData.supportsTransactionIsolationLevel(TRANSACTION_READ_UNCOMMITTED);</span><br><span class="line">metaData.supportsTransactionIsolationLevel(TRANSACTION_READ_COMMITTED);</span><br><span class="line">metaData.supportsTransactionIsolationLevel(TRANSACTION_REPEATABLE_READ);</span><br><span class="line">metaData.supportsTransactionIsolationLevel(TRANSACTION_SERIALIZABLE);</span><br><span class="line">metaData.supportsSavepoints()</span><br></pre></td></tr></table></figure></p>
-<p>在 JDBC 2.0 中，事务最终只能有两个操作：提交或回滚，简单的代码片段如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Connection conn = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    conn = getConnection();</span><br><span class="line">    conn.setAutoCommit(<span class="keyword">false</span>);</span><br><span class="line">    <span class="comment">// Connection类中定义了 4 个与 SQL 92 标准对应的隔离级别常量</span></span><br><span class="line">    conn.setTransactionIsolation(TRANSACTION_READ_COMMITTED);</span><br><span class="line"></span><br><span class="line">    Statement stmt = conn.createStatement();</span><br><span class="line">    stmt.executeUpdate(<span class="string">"insert into user(name,age) values ('lisi',11)"</span>);</span><br><span class="line">    stmt.executeUpdate(<span class="string">"insert into user(name,age) values ('wangwu',22)"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 提交事务</span></span><br><span class="line">    conn.commit();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">	<span class="comment">// 回滚事务</span></span><br><span class="line">	conn.rollback();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/29/Java-事务管理（二）/#more" rel="contents">
-              Read more &raquo;
-            </a>
           </div>
-          <!--/noindex-->
-        
-      
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80Mjc1OC8xOTMwNQ=="></div>
     </div>
 
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2018/09/30/Elasticsearch-Client-使用介绍/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cunbin.shu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shucunbin's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/30/Elasticsearch-Client-使用介绍/" itemprop="url">
-                  Elasticsearch Client 使用介绍
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-09-30 15:00:00 / Modified: 15:20:48" itemprop="dateCreated datePublished" datetime="2018-09-30T15:00:00+08:00">2018-09-30</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/elasticsearch/" itemprop="url" rel="index"><span itemprop="name">elasticsearch</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/09/30/Elasticsearch-Client-使用介绍/" class="leancloud_visitors" data-flag-title="Elasticsearch Client 使用介绍">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Views: </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>Elasticsearch Client 指的是 Elasticsearch 的 Java API 所提供的客户端，我们以多种方式使用 Client：</p>
-<ul>
-<li>在已有的集群上执行标准的 index、get、delete、search 操作</li>
-<li>在正在运行的集群上执行管理任务</li>
-</ul>
-<p>获取 Elasticsearch Client 很简单，最常用的方式是创建<code>TransportClient</code>实例。TransportClient 使用 transport 模块远程连接到 Elasticsearch 集群，它自身不加入集群，而是简单地获取一个或多个初始传输地址，并在每个操作上以轮询的方式与集群通信。</p>
-<p>需要注意的是官方文档中说明 6.x 及其以下版本可以正常使用 TransportClient，在 7.x 会将其废弃，而到 8.x 则会彻底废除，因此在使用需要注意 Elasticsearch 客户端 API 的版本以及后续的迁移计划。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/30/Elasticsearch-Client-使用介绍/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2018/09/29/springboot-data-elasticsearch-版本整理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cunbin.shu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shucunbin's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/29/springboot-data-elasticsearch-版本整理/" itemprop="url">
-                  springboot-data-elasticsearch 版本整理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-09-29 11:38:00" itemprop="dateCreated datePublished" datetime="2018-09-29T11:38:00+08:00">2018-09-29</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-09-30 13:33:00" itemprop="dateModified" datetime="2018-09-30T13:33:00+08:00">2018-09-30</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/elasticsearch/" itemprop="url" rel="index"><span itemprop="name">elasticsearch</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/09/29/springboot-data-elasticsearch-版本整理/" class="leancloud_visitors" data-flag-title="springboot-data-elasticsearch 版本整理">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Views: </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>日常开发中，习惯了使用 Spring 全家桶，其中 Spring Data 更是简化了各种类型数据的访问，不论是 jdbc、redis 还是 elasticsearch。对于 elasticsearch 而言，在使用的 api 版本上有一些特殊的要求，其官网文档上要求 elasticsearch java api 版本必须与连接的 elasticsearch 节点<strong>主版本</strong>一致。</p>
-<blockquote>
-<p>The client must have the same major version (e.g. 2.x, or 5.x) as the nodes in the cluster. Clients may connect to clusters which have a different minor version (e.g. 2.3.x) but it is possible that new functionality may not be supported. Ideally, the client should have the same version as the cluster.</p>
-</blockquote>
-<p>因此，我们在开发时需要仔细核对 spring-data-elasticsearch 与 elasticsearch 的版本对应关系：<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/29/springboot-data-elasticsearch-版本整理/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2018/08/31/数据库事务/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cunbin.shu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shucunbin's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/31/数据库事务/" itemprop="url">
-                  Java 事务管理（一）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-08-31 14:56:00" itemprop="dateCreated datePublished" datetime="2018-08-31T14:56:00+08:00">2018-08-31</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-11-29 17:01:36" itemprop="dateModified" datetime="2018-11-29T17:01:36+08:00">2018-11-29</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java-基础/" itemprop="url" rel="index"><span itemprop="name">Java 基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/31/数据库事务/" class="leancloud_visitors" data-flag-title="Java 事务管理（一）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Views: </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="一、数据库事务"><a href="#一、数据库事务" class="headerlink" title="一、数据库事务"></a>一、数据库事务</h1><h2 id="1-事务的定义"><a href="#1-事务的定义" class="headerlink" title="1. 事务的定义"></a>1. 事务的定义</h2><p>下面是来自维基百科的定义：</p>
-<blockquote>
-<p>数据库事务（简称：事务），它指是数据库管理系统（DBMS）执行过程中的一个逻辑单位，由一个<strong>有限的</strong>数据库<strong>操作序列</strong>构成。<br>一个数据库事务通常包含了一个的对数据库读/写操作序列，它的存在包含有以下两个目的：</p>
-</blockquote>
-<ol>
-<li><p>为数据库操作序列提供了一个从失败中恢复到正常状态的方法，同时提供了数据库即使在异常状态下仍能保持一致性的方法。</p>
-</li>
-<li><p>当多个应用程序在并发访问数据库时，可以在这些应用程序之间提供一个隔离方法，以防止彼此的操作互相干扰。</p>
-</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/31/数据库事务/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2018/08/16/Java-注解简介/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cunbin.shu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shucunbin's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/16/Java-注解简介/" itemprop="url">
-                  Java 注解简介
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-08-16 14:56:00" itemprop="dateCreated datePublished" datetime="2018-08-16T14:56:00+08:00">2018-08-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-31 17:48:54" itemprop="dateModified" datetime="2018-08-31T17:48:54+08:00">2018-08-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java-基础/" itemprop="url" rel="index"><span itemprop="name">Java 基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/16/Java-注解简介/" class="leancloud_visitors" data-flag-title="Java 注解简介">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Views: </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="什么是元数据（metadata）"><a href="#什么是元数据（metadata）" class="headerlink" title="什么是元数据（metadata）"></a>什么是元数据（metadata）</h3><p>元数据从 metadata 一词译来，就是“关于数据的数据”的意思。元数据的功能作用有很多，比如：你可能用过 Javadoc 的注释自动生成文档。这就是元数据功能的一种。总的来说，元数据可以用来创建文档，跟踪代码的依赖性，执行编译时格式检查，代替已有的配置文件。如果要对于元数据的作用进行分类，目前还没有明确的定义，不过我们可以根据它所起的作用，大致可分为三类：</p>
-<ol>
-<li>编写文档：通过代码里标识的元数据生成文档。</li>
-<li>代码分析：通过代码里标识的元数据对代码进行分析。</li>
-<li>编译检查：通过代码里标识的元数据让编译器能实现基本的编译检查</li>
-</ol>
-<p>在 Java 中元数据以标签的形式存在于 Java 代码中，元数据标签的存在并不影响程序代码的编译和执行，它只是被用来生成其它的文件或针在运行时知道被运行代码的描述信息，而注解正是 Java 中的一种元数据。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/16/Java-注解简介/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
   
 
 
-          </div>
-          
 
         </div>
         
@@ -2487,8 +1206,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -2584,6 +1312,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概述"><span class="nav-number">1.</span> <span class="nav-text">1 - 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-注解"><span class="nav-number">2.</span> <span class="nav-text">2 - 注解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-BeforeXXX-及-AfterXXX-注解"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 @BeforeXXX 及 @AfterXXX 注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-DataProvider-注解"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 @DataProvider 注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-Factory-注解"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 @Factory 注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-Listeners-注解"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 @Listeners 注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-Parameters-注解"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 @Parameters 注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-Test-注解"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 @Test 注解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-testng-xml"><span class="nav-number">3.</span> <span class="nav-text">3 - testng.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-运行-TestNG"><span class="nav-number">4.</span> <span class="nav-text">4 - 运行 TestNG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-测试方法、测试类、测试组别"><span class="nav-number">5.</span> <span class="nav-text">5 - 测试方法、测试类、测试组别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-测试方法"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 测试方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-测试组别"><span class="nav-number">6.</span> <span class="nav-text">5.2 测试组别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-组中组"><span class="nav-number">6.1.</span> <span class="nav-text">5.3 组中组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-排除组"><span class="nav-number">6.2.</span> <span class="nav-text">5.4 排除组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-局部组"><span class="nav-number">6.3.</span> <span class="nav-text">5.5 局部组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-6-参数"><span class="nav-number">6.4.</span> <span class="nav-text">5.6 参数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-6-1-来自-testng-xml-中的参数"><span class="nav-number">6.4.1.</span> <span class="nav-text">5.6.1 来自 testng.xml 中的参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-6-2-DataProviders-中的定义的参数"><span class="nav-number">6.4.2.</span> <span class="nav-text">5.6.2 DataProviders 中的定义的参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-6-3-测试报告中的参数"><span class="nav-number">6.4.3.</span> <span class="nav-text">5.6.3 测试报告中的参数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-7-依赖"><span class="nav-number">6.5.</span> <span class="nav-text">5.7 依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-7-1-使用注解定义依赖"><span class="nav-number">6.5.1.</span> <span class="nav-text">5.7.1 使用注解定义依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-7-2-在-XML-文件定义依赖"><span class="nav-number">6.5.2.</span> <span class="nav-text">5.7.2 在 XML 文件定义依赖</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-8-工厂"><span class="nav-number">6.6.</span> <span class="nav-text">5.8 工厂</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-9-类级别的注解"><span class="nav-number">6.7.</span> <span class="nav-text">5.9 类级别的注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-10-并行与超时"><span class="nav-number">6.8.</span> <span class="nav-text">5.10 并行与超时</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-10-1-并行测试集"><span class="nav-number">6.8.1.</span> <span class="nav-text">5.10.1 并行测试集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-10-2-并行测试集、类、方法"><span class="nav-number">6.8.2.</span> <span class="nav-text">5.10.2 并行测试集、类、方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-11-重新执行失败的测试"><span class="nav-number">6.9.</span> <span class="nav-text">5.11 重新执行失败的测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-12-JUnit-测试"><span class="nav-number">6.10.</span> <span class="nav-text">5.12 JUnit 测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-13-编程的方式运行-TestNG"><span class="nav-number">6.11.</span> <span class="nav-text">5.13 编程的方式运行 TestNG</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-14-BeanShell-以及高级组选择器"><span class="nav-number">6.12.</span> <span class="nav-text">5.14 BeanShell 以及高级组选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-15-注解转换器（Annotation-Transformer）"><span class="nav-number">6.13.</span> <span class="nav-text">5.15 注解转换器（Annotation Transformer）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-16-方法拦截器"><span class="nav-number">6.14.</span> <span class="nav-text">5.16 方法拦截器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-17-TestNG-监听器"><span class="nav-number">6.15.</span> <span class="nav-text">5.17 TestNG 监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-17-1-在-testng-xml-或-Java-中指定监听器"><span class="nav-number">6.15.1.</span> <span class="nav-text">5.17.1 在 testng.xml 或 Java 中指定监听器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-17-2-使用-ServiceLoder-指定监听器"><span class="nav-number">6.15.2.</span> <span class="nav-text">5.17.2 使用 ServiceLoder 指定监听器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-18-依赖注入"><span class="nav-number">6.16.</span> <span class="nav-text">5.18 依赖注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-18-1-原生依赖注入"><span class="nav-number">6.17.</span> <span class="nav-text">5.18.1 原生依赖注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-18-2-Guice-依赖注入"><span class="nav-number">6.18.</span> <span class="nav-text">5.18.2 Guice 依赖注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-19-监听方法执行"><span class="nav-number">6.19.</span> <span class="nav-text">5.19 监听方法执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-20-重写测试方法"><span class="nav-number">6.20.</span> <span class="nav-text">5.20 重写测试方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-21-变更测试集或测试"><span class="nav-number">6.21.</span> <span class="nav-text">5.21 变更测试集或测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-测试结果"><span class="nav-number">7.</span> <span class="nav-text">6 - 测试结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-成功、失败及断言"><span class="nav-number">7.1.</span> <span class="nav-text">6.1 成功、失败及断言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-记录与结果"><span class="nav-number">7.2.</span> <span class="nav-text">6.2 记录与结果</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#6-2-1-记录监听器"><span class="nav-number">7.2.1.</span> <span class="nav-text">6.2.1 记录监听器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-2-2-Logging-Reporter"><span class="nav-number">7.2.2.</span> <span class="nav-text">6.2.2 Logging Reporter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-2-3-JUnitReports"><span class="nav-number">7.2.3.</span> <span class="nav-text">6.2.3 JUnitReports</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-2-4-Reporter-API"><span class="nav-number">7.2.4.</span> <span class="nav-text">6.2.4 Reporter API</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-2-5-XML-Reporter"><span class="nav-number">7.2.5.</span> <span class="nav-text">6.2.5 XML Reporter</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-YAML"><span class="nav-number">8.</span> <span class="nav-text">7 - YAML</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -2721,6 +1465,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
 
   
 
@@ -2733,6 +1481,20 @@
 
 
 
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2019/03/04/TestNG-中文文档/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
@@ -2755,43 +1517,42 @@
   
   <script>
     
-    function showTime(Counter) {
-      var entries = [];
+    function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
 
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { "$in": entries } }) })
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
         .done(function ({ results }) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.url;
-            var time = item.time;
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
           }
         })
-        .fail(function ({ responseJSON }) {
-          console.log("LeanCloud Counter Error: " + responseJSON.code + " " + responseJSON.error);
-        });
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
     }
     
 
@@ -2811,9 +1572,7 @@
             });
           };
           
-          if ($('.post-title-link').length >= 1) {
-            showTime(Counter);
-          }
+          addCount(Counter);
           
         })
     });
