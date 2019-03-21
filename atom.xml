@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shucunbin.github.io/"/>
-  <updated>2019-03-19T06:07:09.198Z</updated>
+  <updated>2019-03-21T08:13:06.200Z</updated>
   <id>https://shucunbin.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://shucunbin.github.io/2019/03/19/golang-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/"/>
     <id>https://shucunbin.github.io/2019/03/19/golang-学习资料汇总/</id>
     <published>2019-03-19T06:05:00.000Z</published>
-    <updated>2019-03-19T06:07:09.198Z</updated>
+    <updated>2019-03-21T08:13:06.200Z</updated>
     
-    <content type="html"><![CDATA[<p>一、安装开发环境</p><p><a href="https://blog.csdn.net/zxy_666/article/details/80182688" target="_blank" rel="noopener">mac：Go安装和配置+GoLand安装和使用之完整教程</a></p><p><a href="https://blog.csdn.net/xiaoquantouer/article/details/79985650" target="_blank" rel="noopener">mac：使用Homebrew安装go环境</a></p><p><a href="https://go-zh.org/doc/install" target="_blank" rel="noopener">官方文档 - go 安装及卸载</a></p><p>二、基本概念及语法学习<br><a href="http://go-tour-zh.appspot.com" target="_blank" rel="noopener">A Tour of Go（中文版）</a>，简单快速过了一遍<br><a href="https://yar999.gitbooks.io/gopl-zh/content/index.html" target="_blank" rel="noopener">The Go Programming Language （中文版）</a>，此书也有对应的实体书，由机械工业出版社出版<br><a href="https://go-zh.org/doc/" target="_blank" rel="noopener">Go 语言官方文档 （中文版）</a></p><p>三、动手做</p><p><a href="https://www.amazon.cn/gp/product/B01GE4LNJW/ref=kinw_myk_ro_title" target="_blank" rel="noopener">自己动手写 Java 虚拟机</a> — 此书使用 go 实现虚拟机，练习 go 编码，同时复习 java 虚拟机的知识，一举两得~</p>]]></content>
+    <content type="html"><![CDATA[<p>一、安装开发环境</p><p><a href="https://blog.csdn.net/zxy_666/article/details/80182688" target="_blank" rel="noopener">mac：Go安装和配置+GoLand安装和使用之完整教程</a></p><p><a href="https://blog.csdn.net/xiaoquantouer/article/details/79985650" target="_blank" rel="noopener">mac：使用Homebrew安装go环境</a></p><p><a href="https://go-zh.org/doc/install" target="_blank" rel="noopener">官方文档 - go 安装及卸载</a></p><p>二、基本概念及语法学习</p><p><a href="http://go-tour-zh.appspot.com" target="_blank" rel="noopener">A Tour of Go（中文版）</a>，简单快速过了一遍</p><p><a href="https://yar999.gitbooks.io/gopl-zh/content/index.html" target="_blank" rel="noopener">The Go Programming Language （中文版）</a>，此书也有对应的实体书，由机械工业出版社出版</p><p><a href="https://books.studygolang.com/The-Golang-Standard-Library-by-Example/" target="_blank" rel="noopener">Go语言标准库</a>，包含Go语言各标准库的使用例子</p><p>三、动手做</p><p><a href="https://www.amazon.cn/gp/product/B01GE4LNJW/ref=kinw_myk_ro_title" target="_blank" rel="noopener">自己动手写 Java 虚拟机</a> — 此书使用 go 实现虚拟机，练习 go 编码，同时复习 java 虚拟机的知识，一举两得~</p>]]></content>
     
     <summary type="html">
     
