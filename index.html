@@ -288,6 +288,220 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2019/07/11/Java-8-之-lambda-表达式及函数接口/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cunbin.shu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shucunbin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/11/Java-8-之-lambda-表达式及函数接口/" itemprop="url">
+                  Java 8 之 lambda 表达式及函数接口
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-11 10:32:00 / Modified: 10:35:10" itemprop="dateCreated datePublished" datetime="2019-07-11T10:32:00+08:00">2019-07-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java-基础/" itemprop="url" rel="index"><span itemprop="name">Java 基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/07/11/Java-8-之-lambda-表达式及函数接口/" class="leancloud_visitors" data-flag-title="Java 8 之 lambda 表达式及函数接口">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views: </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="Lambda-表达式"><a href="#Lambda-表达式" class="headerlink" title="Lambda 表达式"></a>Lambda 表达式</h3><p>Lambda 表达式理解为<strong>简洁地表示可传递匿名函数</strong>的一种方式：它没有名称，但有参数列表、函数主体、返回类型以及可能抛出的异常列表。逐个拆解定义中涉及的概念：</p>
+<ul>
+<li>匿名：它无须像普通方法那样有一个明确的名称；</li>
+<li>函数： lambda 表达式不像方法那样必须属于某个特定的类，但其形式又与方法一样，有参数列表、函数主体、返回类型；</li>
+<li>传递：lambda 表达式可以作为参数传递给方法或存储在变量中；</li>
+<li>简洁：无须像匿名类那样写很多模版代码。</li>
+</ul>
+<p>简而言之，lambda 表达式是一个可传递的代码块，可以在声明之后使用一次或多次，其形式可以简单的描述为参数列表、箭头、lambda 主体，下面是常见的 lambda 表达式的例子：</p>
+<table>
+<thead>
+<tr>
+<th>使用案例</th>
+<th>Lambda 示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>布尔表达式</td>
+<td><code>(List&lt;String&gt; list) -&gt; list.isEmpty()</code></td>
+</tr>
+<tr>
+<td>创建对象</td>
+<td><code>() -&gt; new Apple(10)</code></td>
+</tr>
+<tr>
+<td>消费一个对象</td>
+<td><code>(Apple a) -&gt; {System.out.println(a.getWeigth());}</code></td>
+</tr>
+<tr>
+<td>从一个对象选择或抽取</td>
+<td><code>(String s) -&gt; s.length()</code></td>
+</tr>
+<tr>
+<td>组合两个值</td>
+<td><code>(Int a, int b) -&gt; a * b</code></td>
+</tr>
+<tr>
+<td>比较两个对象</td>
+<td><code>(Apple a1, Apple a2) -&gt; a1.getWeight().compareTo(a2.getWeight())</code></td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/07/11/Java-8-之-lambda-表达式及函数接口/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2019/03/19/golang-学习资料汇总/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2005,7 +2219,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

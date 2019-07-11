@@ -109,18 +109,18 @@
 
 
 
-  <meta name="description" content="JDBC 对事务的支持在使用 JDBC API 进行事务操作前，我们可以通过特定的 API 判断当前数据库是否支持事务、是否支持的相应的事务隔离级别以及是否支持保存点，代码片段如下：123456789Connection connection = getConnection();DatabaseMetaData metaData = connection.getMetaData();metaDat">
-<meta name="keywords" content="数据库事务">
+  <meta name="description" content="Lambda 表达式Lambda 表达式理解为简洁地表示可传递匿名函数的一种方式：它没有名称，但有参数列表、函数主体、返回类型以及可能抛出的异常列表。逐个拆解定义中涉及的概念：  匿名：它无须像普通方法那样有一个明确的名称； 函数： lambda 表达式不像方法那样必须属于某个特定的类，但其形式又与方法一样，有参数列表、函数主体、返回类型； 传递：lambda 表达式可以作为参数传递给方法或存储在">
+<meta name="keywords" content="java 8">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java 事务管理（二）">
-<meta property="og:url" content="https://shucunbin.github.io/2018/11/29/Java-事务管理（二）/index.html">
+<meta property="og:title" content="Java 8 之 lambda 表达式及函数接口">
+<meta property="og:url" content="https://shucunbin.github.io/2019/07/11/Java-8-之-lambda-表达式及函数接口/index.html">
 <meta property="og:site_name" content="shucunbin&#39;s blog">
-<meta property="og:description" content="JDBC 对事务的支持在使用 JDBC API 进行事务操作前，我们可以通过特定的 API 判断当前数据库是否支持事务、是否支持的相应的事务隔离级别以及是否支持保存点，代码片段如下：123456789Connection connection = getConnection();DatabaseMetaData metaData = connection.getMetaData();metaDat">
+<meta property="og:description" content="Lambda 表达式Lambda 表达式理解为简洁地表示可传递匿名函数的一种方式：它没有名称，但有参数列表、函数主体、返回类型以及可能抛出的异常列表。逐个拆解定义中涉及的概念：  匿名：它无须像普通方法那样有一个明确的名称； 函数： lambda 表达式不像方法那样必须属于某个特定的类，但其形式又与方法一样，有参数列表、函数主体、返回类型； 传递：lambda 表达式可以作为参数传递给方法或存储在">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-21T03:41:53.844Z">
+<meta property="og:updated_time" content="2019-07-11T02:35:10.820Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java 事务管理（二）">
-<meta name="twitter:description" content="JDBC 对事务的支持在使用 JDBC API 进行事务操作前，我们可以通过特定的 API 判断当前数据库是否支持事务、是否支持的相应的事务隔离级别以及是否支持保存点，代码片段如下：123456789Connection connection = getConnection();DatabaseMetaData metaData = connection.getMetaData();metaDat">
+<meta name="twitter:title" content="Java 8 之 lambda 表达式及函数接口">
+<meta name="twitter:description" content="Lambda 表达式Lambda 表达式理解为简洁地表示可传递匿名函数的一种方式：它没有名称，但有参数列表、函数主体、返回类型以及可能抛出的异常列表。逐个拆解定义中涉及的概念：  匿名：它无须像普通方法那样有一个明确的名称； 函数： lambda 表达式不像方法那样必须属于某个特定的类，但其形式又与方法一样，有参数列表、函数主体、返回类型； 传递：lambda 表达式可以作为参数传递给方法或存储在">
 
 
 
@@ -129,7 +129,7 @@
 
 
 
-  <link rel="canonical" href="https://shucunbin.github.io/2018/11/29/Java-事务管理（二）/"/>
+  <link rel="canonical" href="https://shucunbin.github.io/2019/07/11/Java-8-之-lambda-表达式及函数接口/"/>
 
 
 
@@ -139,7 +139,7 @@
   };
 </script>
 
-  <title>Java 事务管理（二） | shucunbin's blog</title>
+  <title>Java 8 之 lambda 表达式及函数接口 | shucunbin's blog</title>
   
 
 
@@ -292,7 +292,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2018/11/29/Java-事务管理（二）/">
+    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2019/07/11/Java-8-之-lambda-表达式及函数接口/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cunbin.shu">
@@ -309,7 +309,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java 事务管理（二）
+          <h1 class="post-title" itemprop="name headline">Java 8 之 lambda 表达式及函数接口
               
             
           </h1>
@@ -334,24 +334,12 @@
                 
               
 
-              <time title="Created: 2018-11-29 14:24:00" itemprop="dateCreated datePublished" datetime="2018-11-29T14:24:00+08:00">2018-11-29</time>
+              <time title="Created: 2019-07-11 10:32:00 / Modified: 10:35:10" itemprop="dateCreated datePublished" datetime="2019-07-11T10:32:00+08:00">2019-07-11</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-21 11:41:53" itemprop="dateModified" datetime="2018-12-21T11:41:53+08:00">2018-12-21</time>
               
             
           </span>
@@ -382,7 +370,7 @@
 
           
           
-             <span id="/2018/11/29/Java-事务管理（二）/" class="leancloud_visitors" data-flag-title="Java 事务管理（二）">
+             <span id="/2019/07/11/Java-8-之-lambda-表达式及函数接口/" class="leancloud_visitors" data-flag-title="Java 8 之 lambda 表达式及函数接口">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -413,10 +401,111 @@
       
 
       
-        <h1 id="JDBC-对事务的支持"><a href="#JDBC-对事务的支持" class="headerlink" title="JDBC 对事务的支持"></a>JDBC 对事务的支持</h1><p>在使用 JDBC API 进行事务操作前，我们可以通过特定的 API 判断当前数据库是否支持事务、是否支持的相应的事务隔离级别以及是否支持保存点，代码片段如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Connection connection = getConnection();</span><br><span class="line">DatabaseMetaData metaData = connection.getMetaData();</span><br><span class="line"></span><br><span class="line">metaData.supportsTransactions();</span><br><span class="line">metaData.supportsTransactionIsolationLevel(TRANSACTION_READ_UNCOMMITTED);</span><br><span class="line">metaData.supportsTransactionIsolationLevel(TRANSACTION_READ_COMMITTED);</span><br><span class="line">metaData.supportsTransactionIsolationLevel(TRANSACTION_REPEATABLE_READ);</span><br><span class="line">metaData.supportsTransactionIsolationLevel(TRANSACTION_SERIALIZABLE);</span><br><span class="line">metaData.supportsSavepoints()</span><br></pre></td></tr></table></figure></p>
-<p>在 JDBC 2.0 中，事务最终只能有两个操作：提交或回滚，简单的代码片段如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Connection conn = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    conn = getConnection();</span><br><span class="line">    conn.setAutoCommit(<span class="keyword">false</span>);</span><br><span class="line">    <span class="comment">// Connection类中定义了 4 个与 SQL 92 标准对应的隔离级别常量</span></span><br><span class="line">    conn.setTransactionIsolation(TRANSACTION_READ_COMMITTED);</span><br><span class="line"></span><br><span class="line">    Statement stmt = conn.createStatement();</span><br><span class="line">    stmt.executeUpdate(<span class="string">"insert into user(name,age) values ('lisi',11)"</span>);</span><br><span class="line">    stmt.executeUpdate(<span class="string">"insert into user(name,age) values ('wangwu',22)"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 提交事务</span></span><br><span class="line">    conn.commit();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">	<span class="comment">// 回滚事务</span></span><br><span class="line">	conn.rollback();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h3 id="Lambda-表达式"><a href="#Lambda-表达式" class="headerlink" title="Lambda 表达式"></a>Lambda 表达式</h3><p>Lambda 表达式理解为<strong>简洁地表示可传递匿名函数</strong>的一种方式：它没有名称，但有参数列表、函数主体、返回类型以及可能抛出的异常列表。逐个拆解定义中涉及的概念：</p>
+<ul>
+<li>匿名：它无须像普通方法那样有一个明确的名称；</li>
+<li>函数： lambda 表达式不像方法那样必须属于某个特定的类，但其形式又与方法一样，有参数列表、函数主体、返回类型；</li>
+<li>传递：lambda 表达式可以作为参数传递给方法或存储在变量中；</li>
+<li>简洁：无须像匿名类那样写很多模版代码。</li>
+</ul>
+<p>简而言之，lambda 表达式是一个可传递的代码块，可以在声明之后使用一次或多次，其形式可以简单的描述为参数列表、箭头、lambda 主体，下面是常见的 lambda 表达式的例子：</p>
+<table>
+<thead>
+<tr>
+<th>使用案例</th>
+<th>Lambda 示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>布尔表达式</td>
+<td><code>(List&lt;String&gt; list) -&gt; list.isEmpty()</code></td>
+</tr>
+<tr>
+<td>创建对象</td>
+<td><code>() -&gt; new Apple(10)</code></td>
+</tr>
+<tr>
+<td>消费一个对象</td>
+<td><code>(Apple a) -&gt; {System.out.println(a.getWeigth());}</code></td>
+</tr>
+<tr>
+<td>从一个对象选择或抽取</td>
+<td><code>(String s) -&gt; s.length()</code></td>
+</tr>
+<tr>
+<td>组合两个值</td>
+<td><code>(Int a, int b) -&gt; a * b</code></td>
+</tr>
+<tr>
+<td>比较两个对象</td>
+<td><code>(Apple a1, Apple a2) -&gt; a1.getWeight().compareTo(a2.getWeight())</code></td>
+</tr>
+</tbody>
+</table>
 <a id="more"></a>
-<p>在 JDBC 3.0（Java 1.4 及之后的版本）引入了一个全新的保存点（Sava point）特性，保存点使得用户可以将事务分隔为多个阶段，并且可以指定事务回滚到特定的保存点，代码片段如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Connection conn = <span class="keyword">null</span>;</span><br><span class="line">Savepoint savepoint = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    conn = getConnection();</span><br><span class="line">    conn.setAutoCommit(<span class="keyword">false</span>);</span><br><span class="line">    conn.setTransactionIsolation(TRANSACTION_READ_COMMITTED);</span><br><span class="line"></span><br><span class="line">    Statement stmt = conn.createStatement();</span><br><span class="line">    stmt.executeUpdate(<span class="string">"insert into user(name,age) values ('zhangfei',50)"</span>);</span><br><span class="line">    savepoint = conn.setSavepoint(<span class="string">"savePoint1"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// name 字段有唯一键</span></span><br><span class="line">    stmt.executeUpdate(<span class="string">"insert into user(name,age) values ('zhangfei',51)"</span>);</span><br><span class="line"></span><br><span class="line">    conn.commit();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    <span class="keyword">if</span> (savepoint == <span class="keyword">null</span>) &#123;</span><br><span class="line">		conn.rollback();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        conn.rollback(savepoint);</span><br><span class="line">        conn.commit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h3><p>方法引用可以被看作仅仅调用特定方法的 Lambda 表达式的一种快捷写法。它的基本思想是，如果一个 Lambda 表达式代表的只是<strong>直接调用这个方法</strong>，那最好还是直接用方法的名称来调用它，而不是去描述如何调用它。换而言之，可以把方法引用看作是特定 Lambda 表达式的语法糖。</p>
+<p>构建方法引用有 3 种方式：</p>
+<ul>
+<li><code>Class::staticMethod</code>：等价于 lambda 参数列表也是 lambda 主体里调用方法的参数，如 <code>Math::pow</code> 等价于 <code>(x, y) -&gt; Math.pow(x,y)</code>。</li>
+<li><p><code>Class::instanceMethod</code>：等价于 lambda 参数列表的第一个参数是  lambda 主体里调用方法的目标对象，如<code>String::compareToIgnoreCase</code> 等价于<code>(x, y) -&gt; x.compareToIgnoreCase(y)</code>。</p>
+</li>
+<li><p><code>object::instaceMethod</code>：在 Lambda 中调用一个已经存在的外部对象中的方法。</p>
+</li>
+</ul>
+<p>还有一些特殊的方法引用：构造器引用（ClassName::new)、使用 this 关键字引用方法（this::methodName)、使用 super 关键字引用父类方法(super::methodName)。</p>
+<p>注：在 lambda 表达式中， this 与 super 的含义并未发生变化，this/super 关键字指的是创建这个 lambda 表达式的的方法的 this，如下面代码，this.toString() 会调用 Application 对象的 toString() 方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ActionListener listener = event -&gt; &#123;</span><br><span class="line">      System.out.println(<span class="keyword">this</span>.toString());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="函数接口"><a href="#函数接口" class="headerlink" title="函数接口"></a>函数接口</h3><p>函数接口（functional interface）就是只有一个抽象方法的接口，当需要这种接口的对象时，可以提供一个 lambda 表达式来表示其实例。</p>
+<p>用函数式接口可以干什么呢？Lambda表达式允许你直接以内联的形式为函数式接口的抽象方法提供实现，<strong>并把整个表达式作为函数式接口的实例</strong>（具体说来，是函数式接口一个<strong>具体实现</strong>的实例）。你用匿名内部类也可以完成同样的事情，只不过比较笨拙：需要提供一个实现，然后再直接内联将它实例化。</p>
+<h3 id="常见的函数接口形式"><a href="#常见的函数接口形式" class="headerlink" title="常见的函数接口形式"></a>常见的函数接口形式</h3><table>
+<thead>
+<tr>
+<th>接口</th>
+<th>参数</th>
+<th>返回类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Predicate<t></t></td>
+<td>T</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>Consumer<t></t></td>
+<td>T</td>
+<td>void</td>
+</tr>
+<tr>
+<td>Function&lt;T,R&gt;</td>
+<td>T</td>
+<td>R</td>
+</tr>
+<tr>
+<td>Supplier<t></t></td>
+<td>None</td>
+<td>T</td>
+</tr>
+<tr>
+<td>UnaryOperator<t></t></td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>BinaryOperator<t></t></td>
+<td>(T,T)</td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<h3 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h3><p>在 java 中，lambda 表达式可以捕获外围作用域中变量的值，不过首先要确保所捕获的值是明确定义的，其次还有一个重要的限制：lambda 表达式中捕获的变量必须实际上的最终变量 (effectively final)。<strong>最终变量</strong>指的是这个变量初始化之后就不会再为它赋新值。之所以有这个限制是有原因的，假如在 lambda 表达式中可以改变变量的值， 那么并发执行多个动作时就会有线程安全问题。</p>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p>先说结论：lambda 表达式里无法直接抛出受检查异常。我们可以使用try-catch语句捕获受检查异常，然后吞掉异常或者抛出一个运行时异常，但这失去 lambda 表达式的简洁性，代码的可阅读性甚至还不如不使用 lambda 表达式。至于  lambda 表达式不能抛出受检查异常原因，其实也很简单，API 设计的问题，从上面几节可以知道，我们可以lambda表达式看作是实现了 函数式接口的实例，而 java 预定义的函数式接口中的方法签名没有声明可能抛出的异常列表。</p>
+<p>更多的讨论，可以参考 stackoverflow 上的文章：</p>
+<p><a href="https://stackoverflow.com/questions/27644361/how-can-i-throw-checked-exceptions-from-inside-java-8-streams" target="_blank" rel="noopener"><a href="https://stackoverflow.com/questions/27644361/how-can-i-throw-checked-exceptions-from-inside-java-8-streams" target="_blank" rel="noopener">How can I throw CHECKED exceptions from inside Java 8 streams?</a></a></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>以上为记录了 lambda 表达式及相关的概念中容易混淆遗忘的部分，以备将来翻阅。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>《Java核心技术卷一基础知识第10版》</p>
+<p>《Java 8实战》</p>
 
       
     </div>
@@ -437,7 +526,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数据库事务/" rel="tag"># 数据库事务</a>
+            <a href="/tags/java-8/" rel="tag"># java 8</a>
           
         </div>
       
@@ -450,8 +539,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/30/Elasticsearch-Client-使用介绍/" rel="next" title="Elasticsearch Client 使用介绍">
-                <i class="fa fa-chevron-left"></i> Elasticsearch Client 使用介绍
+              <a href="/2019/03/19/golang-学习资料汇总/" rel="next" title="golang 资料汇总（持续添加~）">
+                <i class="fa fa-chevron-left"></i> golang 资料汇总（持续添加~）
               </a>
             
           </div>
@@ -459,10 +548,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/18/Java-8-之接口默认方法及静态方法/" rel="prev" title="Java 8 之接口默认方法及静态方法">
-                Java 8 之接口默认方法及静态方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -630,7 +715,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JDBC-对事务的支持"><span class="nav-number">1.</span> <span class="nav-text">JDBC 对事务的支持</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambda-表达式"><span class="nav-number">1.</span> <span class="nav-text">Lambda 表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法引用"><span class="nav-number">2.</span> <span class="nav-text">方法引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数接口"><span class="nav-number">3.</span> <span class="nav-text">函数接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的函数接口形式"><span class="nav-number">4.</span> <span class="nav-text">常见的函数接口形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量作用域"><span class="nav-number">5.</span> <span class="nav-text">变量作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常处理"><span class="nav-number">6.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">7.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">8.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
@@ -792,7 +877,7 @@
   
     <script type="text/javascript">
       window.livereOptions = {
-        refer: '2018/11/29/Java-事务管理（二）/'
+        refer: '2019/07/11/Java-8-之-lambda-表达式及函数接口/'
       };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];
