@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://shucunbin.github.io/2019/11/21/elasticsearch-%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B-match-phrase/</loc>
+    <lastmod>2019-11-21</lastmod>
+  </url>  <url>
     <loc>https://shucunbin.github.io/2019/07/11/Java-8-%E4%B9%8B-lambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8F%8A%E5%87%BD%E6%95%B0%E6%8E%A5%E5%8F%A3/</loc>
     <lastmod>2019-07-11</lastmod>
   </url>  <url>
