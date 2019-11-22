@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+<meta name="baidu-site-verification" content="WH7aKiAc7b" />
+<meta name="google-site-verification" content="jA24Pja68Ph1LzQcLCXW8v0Rd17xK_OD-rSlN6FSjRg" />
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="简介match_phrase_prefix 查询与上一篇笔记记录的 match_phrase  查询相似，返回包含且相对位置与我们提供的文本单词词组一致的文档，不同之处在于match_phrase_prefix 查询文本中的最后一个单词被视为前缀，以该单词开头的任何单词都将匹配。 举个简单的例子：如果我们的搜索文本为 quick brown f ，它将匹配quick brown fox 或 是tw">
+<meta property="og:type" content="article">
+<meta property="og:title" content="elasticsearch 学习笔记之 match_phrase_prefix">
+<meta property="og:url" content="https://shucunbin.github.io/2019/11/22/elasticsearch-学习笔记之-match-phrase-prefix/index.html">
+<meta property="og:site_name" content="shucunbin&#39;s blog">
+<meta property="og:description" content="简介match_phrase_prefix 查询与上一篇笔记记录的 match_phrase  查询相似，返回包含且相对位置与我们提供的文本单词词组一致的文档，不同之处在于match_phrase_prefix 查询文本中的最后一个单词被视为前缀，以该单词开头的任何单词都将匹配。 举个简单的例子：如果我们的搜索文本为 quick brown f ，它将匹配quick brown fox 或 是tw">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-11-22T06:28:58.211Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="elasticsearch 学习笔记之 match_phrase_prefix">
+<meta name="twitter:description" content="简介match_phrase_prefix 查询与上一篇笔记记录的 match_phrase  查询相似，返回包含且相对位置与我们提供的文本单词词组一致的文档，不同之处在于match_phrase_prefix 查询文本中的最后一个单词被视为前缀，以该单词开头的任何单词都将匹配。 举个简单的例子：如果我们的搜索文本为 quick brown f ，它将匹配quick brown fox 或 是tw">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="shucunbin's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://shucunbin.github.io/2019/11/22/elasticsearch-学习笔记之-match-phrase-prefix/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>elasticsearch 学习笔记之 match_phrase_prefix | shucunbin's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">shucunbin's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2019/11/22/elasticsearch-学习笔记之-match-phrase-prefix/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cunbin.shu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shucunbin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">elasticsearch 学习笔记之 match_phrase_prefix
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-11-22 14:28:00 / Modified: 14:28:58" itemprop="dateCreated datePublished" datetime="2019-11-22T14:28:00+08:00">2019-11-22</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/11/22/elasticsearch-学习笔记之-match-phrase-prefix/" class="leancloud_visitors" data-flag-title="elasticsearch 学习笔记之 match_phrase_prefix">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views: </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><code>match_phrase_prefix</code> 查询与<a href="https://shucunbin.github.io/2019/11/21/elasticsearch-%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B-match-phrase/#more">上一篇笔记</a>记录的 <code>match_phrase</code>  查询相似，返回包含且相对位置与我们提供的文本单词词组一致的文档，不同之处在于<code>match_phrase_prefix</code> 查询文本中的<strong>最后一个</strong>单词被视为前缀，以该单词开头的任何单词都将匹配。</p>
+<p>举个简单的例子：如果我们的搜索文本为 <code>quick brown f</code> ，它将匹配<code>quick brown fox</code> 或 是<code>two quick brown ferrets</code> ，但无法匹配包含 <code>fox is quick and brown</code>。</p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p><code>match_phrase_prefix</code> 的顶层参数：</p>
+<ul>
+<li><code>&lt;field&gt;</code> (Required, object) - 表示要搜索的目标文档字段名称</li>
+</ul>
+<p><code>&lt;field&gt;</code> 的参数：</p>
+<ul>
+<li><code>query</code>(Required, string) - 表示希望在 <code>&lt;field&gt;</code> 字段里搜索到的文本内容</li>
+<li><code>analyzer</code>(Optional, string) - 表示指定一个分析器，用于分析 <code>query</code> 参数输入的搜索文本。如果未指定，则使用索引 <code>field</code> 字段时使用的分析器，如果 <code>field</code> 字段也未指定，则使用索引创建时的分析器。</li>
+<li><code>max_expansions</code>(Optional, string) - 用于控制前缀扩展成分词的数量，默认值是 50，这个参数常用于控制返回的匹配文档数量，需要特别注意的是：<code>max_expansions</code> 是作用于<strong>分片级别(shard level)</strong>的，这意味着即使设置为1，依然有可能匹配到多个词，这些词来自不同的<em>分片（shards）</em>。这种行为使得结果看起来跟 <code>max_expansions</code> 没生效一样，因此谨记计算返回搜索结果的关键词数量不能作为检验 <code>max_expansions</code>是否生效的方法。更多的介绍，请参考博客 <a href="https://www.elastic.co/blog/found-fuzzy-search" target="_blank" rel="noopener">How to Use Fuzzy Searches in Elasticsearch</a> 。</li>
+<li><code>slop</code> - 用于指定短语之间<strong>最大的间隔距离</strong>，默认是 0，即必须紧挨着。</li>
+</ul>
+<p>完整的 DSL ：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"query"</span>: &#123;</span><br><span class="line">		<span class="attr">"match_phrase_prefix"</span>: &#123;</span><br><span class="line">			<span class="attr">"address"</span>: &#123;</span><br><span class="line">				<span class="attr">"query"</span>: <span class="string">"171 Av"</span>,</span><br><span class="line">				<span class="attr">"analyzer"</span>: <span class="string">"standard"</span>,</span><br><span class="line">				<span class="attr">"slop"</span>: <span class="number">1</span>,</span><br><span class="line">				<span class="attr">"max_expansions"</span>: <span class="number">10</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>cURL 格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl -XPOST http://localhost:9200/bank/account/_search -H <span class="string">'Content-Type: application/json'</span> -d <span class="string">'&#123;</span></span><br><span class="line"><span class="string">    "query": &#123;</span></span><br><span class="line"><span class="string">        "match_phrase_prefix": &#123;</span></span><br><span class="line"><span class="string">            "address": &#123;</span></span><br><span class="line"><span class="string">                "query": "171 Av",</span></span><br><span class="line"><span class="string">                "analyzer": "standard",</span></span><br><span class="line"><span class="string">                "slop": 1,</span></span><br><span class="line"><span class="string">                "max_expansions": 10</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;'</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="Java-API"><a href="#Java-API" class="headerlink" title="Java API"></a>Java API</h1><p>下面是基于 elasticsearch 版本 6.4.1 的测试代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testMatchPhrasePrefix</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    String key = <span class="string">"171 av"</span>;</span><br><span class="line">    MatchPhrasePrefixQueryBuilder builder = QueryBuilders.matchPhrasePrefixQuery(<span class="string">"address"</span>, key);</span><br><span class="line">    builder.analyzer(<span class="string">"standard"</span>)</span><br><span class="line">            .slop(<span class="number">1</span>)</span><br><span class="line">            .maxExpansions(<span class="number">50</span>);</span><br><span class="line">    SearchResponse searchResponse = getClient().prepareSearch()</span><br><span class="line">            .setIndices(<span class="string">"bank"</span>)</span><br><span class="line">            .setTypes(<span class="string">"account"</span>)</span><br><span class="line">            .setQuery(builder)</span><br><span class="line">            .get();</span><br><span class="line">    log.info(<span class="string">"&gt;&gt;&gt;&gt;&gt;&gt; search result:&#123;&#125;"</span>, parseSearchResponse(searchResponse));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> Client <span class="title">getClient</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Settings settings = Settings.builder()</span><br><span class="line">            .put(<span class="string">"client.transport.ignore_cluster_name"</span>, <span class="keyword">true</span>)</span><br><span class="line">            .build();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        TransportClient client = <span class="keyword">new</span> PreBuiltTransportClient(settings);</span><br><span class="line">        client.addTransportAddress(<span class="keyword">new</span> TransportAddress(InetAddress.getByName(<span class="string">"127.0.0.1"</span>), <span class="number">9300</span>));</span><br><span class="line">        <span class="keyword">return</span> client;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"初始化ES客户端失败"</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> String <span class="title">parseSearchResponse</span><span class="params">(SearchResponse searchResponse)</span> </span>&#123;</span><br><span class="line">    StringBuilder response = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    <span class="keyword">if</span> (searchResponse != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (SearchHit searchHit : searchResponse.getHits().getHits()) &#123;</span><br><span class="line">            response.append(searchHit.getSourceAsString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> response.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试输出结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;&gt;&gt;&gt; search result:&#123;<span class="string">"account_number"</span>:25,<span class="string">"balance"</span>:40540,<span class="string">"firstname"</span>:<span class="string">"Virginia"</span>,<span class="string">"lastname"</span>:<span class="string">"Ayala"</span>,<span class="string">"age"</span>:39,<span class="string">"gender"</span>:<span class="string">"F"</span>,<span class="string">"address"</span>:<span class="string">"171 Putnam Avenue"</span>,<span class="string">"employer"</span>:<span class="string">"Filodyne"</span>,<span class="string">"email"</span>:<span class="string">"virginiaayala@filodyne.com"</span>,<span class="string">"city"</span>:<span class="string">"Nicholson"</span>,<span class="string">"state"</span>:<span class="string">"PA"</span>&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="扩展延伸"><a href="#扩展延伸" class="headerlink" title="扩展延伸"></a>扩展延伸</h1><p><code>match_phrase_prefix</code> 算是一种简易版的自动完成（autocomplete）实现，它易于使用，得到的结果大部分情况下也可以接受，但如果需要更改质量的搜索推荐，例如类似搜索引擎的那种自动补充功能，则需要使用 elasticsearch 提供的 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.1/search-suggesters.html" target="_blank" rel="noopener">completion suggester</a> 功能。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase-prefix.html" target="_blank" rel="noopener">官方参考文档</a></p>
+<p><a href="https://www.elastic.co/cn/blog/found-fuzzy-search" target="_blank" rel="noopener">How to Use Fuzzy Searches in Elasticsearch</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/21/elasticsearch-全文搜索之-match-phrase/" rel="next" title="elasticsearch 学习笔记之 match_phrase">
+                <i class="fa fa-chevron-left"></i> elasticsearch 学习笔记之 match_phrase
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80Mjc1OC8xOTMwNQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">cunbin.shu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-API"><span class="nav-number">3.</span> <span class="nav-text">Java API</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展延伸"><span class="nav-number">4.</span> <span class="nav-text">扩展延伸</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cunbin.shu</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2019/11/22/elasticsearch-学习笔记之-match-phrase-prefix/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "HA6ymfjsEOuap0hd5s3xkfhT-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "HA6ymfjsEOuap0hd5s3xkfhT-gzGzoHsz",
+                'X-LC-Key': "XtTVwjbvJbDs5rwYRW3eBd1v",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

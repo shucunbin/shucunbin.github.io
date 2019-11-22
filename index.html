@@ -288,7 +288,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2019/11/21/elasticsearch-全文搜索之-match-phrase/">
+    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2019/11/22/elasticsearch-学习笔记之-match-phrase-prefix/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cunbin.shu">
@@ -307,8 +307,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/21/elasticsearch-全文搜索之-match-phrase/" itemprop="url">
-                  elasticsearch 学习笔记之 match phrase
+                <a class="post-title-link" href="/2019/11/22/elasticsearch-学习笔记之-match-phrase-prefix/" itemprop="url">
+                  elasticsearch 学习笔记之 match_phrase_prefix
                 </a>
               
             
@@ -334,12 +334,195 @@
                 
               
 
-              <time title="Created: 2019-11-21 17:28:00 / Modified: 17:32:13" itemprop="dateCreated datePublished" datetime="2019-11-21T17:28:00+08:00">2019-11-21</time>
+              <time title="Created: 2019-11-22 14:28:00 / Modified: 14:28:58" itemprop="dateCreated datePublished" datetime="2019-11-22T14:28:00+08:00">2019-11-22</time>
             
 
             
               
 
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/11/22/elasticsearch-学习笔记之-match-phrase-prefix/" class="leancloud_visitors" data-flag-title="elasticsearch 学习笔记之 match_phrase_prefix">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views: </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><code>match_phrase_prefix</code> 查询与<a href="https://shucunbin.github.io/2019/11/21/elasticsearch-%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B-match-phrase/#more">上一篇笔记</a>记录的 <code>match_phrase</code>  查询相似，返回包含且相对位置与我们提供的文本单词词组一致的文档，不同之处在于<code>match_phrase_prefix</code> 查询文本中的<strong>最后一个</strong>单词被视为前缀，以该单词开头的任何单词都将匹配。</p>
+<p>举个简单的例子：如果我们的搜索文本为 <code>quick brown f</code> ，它将匹配<code>quick brown fox</code> 或 是<code>two quick brown ferrets</code> ，但无法匹配包含 <code>fox is quick and brown</code>。</p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p><code>match_phrase_prefix</code> 的顶层参数：</p>
+<ul>
+<li><code>&lt;field&gt;</code> (Required, object) - 表示要搜索的目标文档字段名称</li>
+</ul>
+<p><code>&lt;field&gt;</code> 的参数：</p>
+<ul>
+<li><code>query</code>(Required, string) - 表示希望在 <code>&lt;field&gt;</code> 字段里搜索到的文本内容</li>
+<li><code>analyzer</code>(Optional, string) - 表示指定一个分析器，用于分析 <code>query</code> 参数输入的搜索文本。如果未指定，则使用索引 <code>field</code> 字段时使用的分析器，如果 <code>field</code> 字段也未指定，则使用索引创建时的分析器。</li>
+<li><code>max_expansions</code>(Optional, string) - 用于控制前缀扩展成分词的数量，默认值是 50，这个参数常用于控制返回的匹配文档数量，需要特别注意的是：<code>max_expansions</code> 是作用于<strong>分片级别(shard level)</strong>的，这意味着即使设置为1，依然有可能匹配到多个词，这些词来自不同的<em>分片（shards）</em>。这种行为使得结果看起来跟 <code>max_expansions</code> 没生效一样，因此谨记计算返回搜索结果的关键词数量不能作为检验 <code>max_expansions</code>是否生效的方法。更多的介绍，请参考博客 <a href="https://www.elastic.co/blog/found-fuzzy-search" target="_blank" rel="noopener">How to Use Fuzzy Searches in Elasticsearch</a> 。</li>
+<li><code>slop</code> - 用于指定短语之间<strong>最大的间隔距离</strong>，默认是 0，即必须紧挨着。</li>
+</ul>
+<p>完整的 DSL ：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"query"</span>: &#123;</span><br><span class="line">		<span class="attr">"match_phrase_prefix"</span>: &#123;</span><br><span class="line">			<span class="attr">"address"</span>: &#123;</span><br><span class="line">				<span class="attr">"query"</span>: <span class="string">"171 Av"</span>,</span><br><span class="line">				<span class="attr">"analyzer"</span>: <span class="string">"standard"</span>,</span><br><span class="line">				<span class="attr">"slop"</span>: <span class="number">1</span>,</span><br><span class="line">				<span class="attr">"max_expansions"</span>: <span class="number">10</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>cURL 格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl -XPOST http://localhost:9200/bank/account/_search -H <span class="string">'Content-Type: application/json'</span> -d <span class="string">'&#123;</span></span><br><span class="line"><span class="string">    "query": &#123;</span></span><br><span class="line"><span class="string">        "match_phrase_prefix": &#123;</span></span><br><span class="line"><span class="string">            "address": &#123;</span></span><br><span class="line"><span class="string">                "query": "171 Av",</span></span><br><span class="line"><span class="string">                "analyzer": "standard",</span></span><br><span class="line"><span class="string">                "slop": 1,</span></span><br><span class="line"><span class="string">                "max_expansions": 10</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;'</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/11/22/elasticsearch-学习笔记之-match-phrase-prefix/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2019/11/21/elasticsearch-全文搜索之-match-phrase/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cunbin.shu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shucunbin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/21/elasticsearch-全文搜索之-match-phrase/" itemprop="url">
+                  elasticsearch 学习笔记之 match_phrase
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-11-21 17:28:00" itemprop="dateCreated datePublished" datetime="2019-11-21T17:28:00+08:00">2019-11-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-11-22 14:27:52" itemprop="dateModified" datetime="2019-11-22T14:27:52+08:00">2019-11-22</time>
               
             
           </span>
@@ -370,7 +553,7 @@
 
           
           
-             <span id="/2019/11/21/elasticsearch-全文搜索之-match-phrase/" class="leancloud_visitors" data-flag-title="elasticsearch 学习笔记之 match phrase">
+             <span id="/2019/11/21/elasticsearch-全文搜索之-match-phrase/" class="leancloud_visitors" data-flag-title="elasticsearch 学习笔记之 match_phrase">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -413,6 +596,10 @@
 <li><code>analyzer(Optional, string)</code> - 分析器用于分析 <code>query</code> 参数输入的搜索文本。如果未指定，则使用索引 <code>field</code> 字段时使用的分析器，如果 <code>field</code> 字段也未指定，则使用索引创建时的分析器。</li>
 <li><code>slop(Optional, integer)</code> - 用于指定短语之间<strong>最大的间隔距离</strong>，默认是 0，即必须紧挨着。</li>
 </ul>
+<p>完整的 DSL:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="string">"query"</span>: &#123;</span><br><span class="line">		<span class="string">"match_phrase"</span>: &#123;</span><br><span class="line">			<span class="string">"message"</span>: &#123;</span><br><span class="line">				<span class="string">"query"</span>: <span class="string">"this is a test"</span>,</span><br><span class="line">				<span class="string">"analyzer"</span>: <span class="string">"my_analyzer"</span>,</span><br><span class="line">				<span class="string">"slop"</span>: 1</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>cURL 格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET <span class="string">"localhost:9200/_search?pretty"</span> -H <span class="string">'Content-Type: application/json'</span> -d <span class="string">'&#123;</span></span><br><span class="line"><span class="string">	"query": &#123;</span></span><br><span class="line"><span class="string">		"match_phrase": &#123;</span></span><br><span class="line"><span class="string">			"message": &#123;</span></span><br><span class="line"><span class="string">				"query": "this is a test",</span></span><br><span class="line"><span class="string">				"analyzer": "my_analyzer",</span></span><br><span class="line"><span class="string">				"slop": 1</span></span><br><span class="line"><span class="string">			&#125;</span></span><br><span class="line"><span class="string">		&#125;</span></span><br><span class="line"><span class="string">	&#125;</span></span><br><span class="line"><span class="string">&#125;'</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/11/21/elasticsearch-全文搜索之-match-phrase/#more" rel="contents">
@@ -1974,200 +2161,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2018/08/31/数据库事务/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cunbin.shu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shucunbin's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/31/数据库事务/" itemprop="url">
-                  Java 事务管理（一）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-08-31 14:56:00" itemprop="dateCreated datePublished" datetime="2018-08-31T14:56:00+08:00">2018-08-31</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-11-29 17:01:36" itemprop="dateModified" datetime="2018-11-29T17:01:36+08:00">2018-11-29</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java-基础/" itemprop="url" rel="index"><span itemprop="name">Java 基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/31/数据库事务/" class="leancloud_visitors" data-flag-title="Java 事务管理（一）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Views: </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="一、数据库事务"><a href="#一、数据库事务" class="headerlink" title="一、数据库事务"></a>一、数据库事务</h1><h2 id="1-事务的定义"><a href="#1-事务的定义" class="headerlink" title="1. 事务的定义"></a>1. 事务的定义</h2><p>下面是来自维基百科的定义：</p>
-<blockquote>
-<p>数据库事务（简称：事务），它指是数据库管理系统（DBMS）执行过程中的一个逻辑单位，由一个<strong>有限的</strong>数据库<strong>操作序列</strong>构成。<br>一个数据库事务通常包含了一个的对数据库读/写操作序列，它的存在包含有以下两个目的：</p>
-</blockquote>
-<ol>
-<li><p>为数据库操作序列提供了一个从失败中恢复到正常状态的方法，同时提供了数据库即使在异常状态下仍能保持一致性的方法。</p>
-</li>
-<li><p>当多个应用程序在并发访问数据库时，可以在这些应用程序之间提供一个隔离方法，以防止彼此的操作互相干扰。</p>
-</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/31/数据库事务/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2215,7 +2208,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
