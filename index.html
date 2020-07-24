@@ -288,6 +288,205 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2020/07/24/elasticsearch-学习笔记之-shrink-index/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cunbin.shu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shucunbin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/24/elasticsearch-学习笔记之-shrink-index/" itemprop="url">
+                  elasticsearch 学习笔记之 shrink index
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-07-24 14:20:00 / Modified: 14:20:57" itemprop="dateCreated datePublished" datetime="2020-07-24T14:20:00+08:00">2020-07-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/07/24/elasticsearch-学习笔记之-shrink-index/" class="leancloud_visitors" data-flag-title="elasticsearch 学习笔记之 shrink index">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views: </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>shrink index API 的用途是缩减索引主分片的数量， 它将生成更大的分片，适合于长期存储冷数据。以下内容翻译自官方文档 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.8/indices-shrink-index.html" target="_blank" rel="noopener">elasticsearch 6.8 reference - shrink index</a>，并添加了基于 java api 的实现代码，以供日后翻阅。</p>
+<h1 id="收缩索引"><a href="#收缩索引" class="headerlink" title="收缩索引"></a>收缩索引</h1><p>使用 shrink index API 可以将一个已存在的索引收缩到一个主分片数更少的目标索引中。目标索引的主分片数必须是原索引主分片数的一个因子。例如，如果原索引的主分片数为 8，那么目标索引的允许的主分片数只能为 4、2、1，如果原索引的主分片为一个质数，那么目标索引的主分片数只能为 1。除了主分片数量上的要求外，在收缩请求之前，在某个节点上，原索引的每个分片都要有一个拷贝（可以是副本分片也可以是主分片）分配在这个节点上。</p>
+<p>shrink 的内部实现流程如下：</p>
+<ul>
+<li>首先，使用与原索引相同的配置创建一个新的目标索引，但其主分片数小于原索引的主分片数。</li>
+<li>将源索引的段（segments），硬链接（hardlinks）到目标索引，如果文件系统不支持硬链接，那么只能将段复制到目标索引中，这当然是一个耗时操作。此外，如果原索引配置使用了多数据路径（data path）并且各个路径不在同一个硬盘上，则同样需要拷贝所有的段文件，因为硬链接不支持跨硬盘。</li>
+<li>最后，目标索引恢复使用，就像其被重新打开一样。</li>
+</ul>
+<h1 id="准备收缩一个索引"><a href="#准备收缩一个索引" class="headerlink" title="准备收缩一个索引"></a>准备收缩一个索引</h1><p>为了收缩索引，首先，需要将索引设置为只读。其次，索引的每个分片都要有一个拷贝重新定位到某个节点上并且其健康值为绿色。</p>
+<p>这两个前提条件可以使用以下请求实现：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">PUT /my_source_index/_settings</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"settings"</span>:&#123;</span><br><span class="line">    "index.routing.allocation.require._name":"shrink_node_name",（1）</span><br><span class="line">    "index.blocks.write":true（2）</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 对应的 java 客户端实现（基于 TransportClient）</span><br><span class="line">Settings settings = Settings.builder()</span><br><span class="line">		.put("index.routing.allocation.require._name", "es-node1")</span><br><span class="line">		.put("index.blocks.write", true)</span><br><span class="line">		.build();</span><br><span class="line">AcknowledgedResponse response = getClient().admin().indices()</span><br><span class="line">		.prepareUpdateSettings("my_source_index")</span><br><span class="line">		.setSettings(settings)</span><br><span class="line">		.get();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>(1)  强制重定位每个分配的一个拷贝到节点 <code>shrink_node_name</code>  上，更多重定位的信息请参考<a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.8/shard-allocation-filtering.html" target="_blank" rel="noopener">Shard Allocation Filtering</a>。</p>
+<p>(2) 阻止索引的写操作，同时仍允许其更改元数据，例如删除索引。</p>
+</blockquote>
+<p>重定位源索引可能需要一段时间，可以使用 <code>_cat recovery API</code> 跟踪进度，或者使用 <code>cluster health API</code> 查看<code>relocating_shards</code> 参数，以等待所有的分配重定位完成。</p>
+<h1 id="收缩一个索引"><a href="#收缩一个索引" class="headerlink" title="收缩一个索引"></a>收缩一个索引</h1><p>使用以下请求将索引<code>my_source_index</code> 收缩到新的索引 <code>my_target_index</code>：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">POST my_source_index/_shrink/my_target_index?copy_settings=true</span><br><span class="line">&#123;</span><br><span class="line">	"index.routing.allocation.require._name": null, (1)</span><br><span class="line">  "index.blocks.write": null (2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 对应的 java 客户端实现</span><br><span class="line">ResizeResponse resizeResponse = getClient().admin().indices()</span><br><span class="line">        .prepareResizeIndex(sourceIndex, targetIndex)</span><br><span class="line">        .setResizeType(ResizeType.SHRINK)</span><br><span class="line">        .setSettings(Settings.builder()</span><br><span class="line">                .putNull("index.routing.allocation.require._name")</span><br><span class="line">                .putNull("index.blocks.write")</span><br><span class="line">                .build())</span><br><span class="line">        .setWaitForActiveShards(1)</span><br><span class="line">        .get();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>(1) 清除从原索引拷贝过来的重定位分片配置</p>
+<p>(2) 清除从原索引拷贝过来的禁止写配置</p>
+</blockquote>
+<p>目标索引成功加入集群后，以上请求会立即返回，而不会等待收缩请求真正完成。</p>
+<blockquote>
+<p>索引只有满足以下所有必要条件才会真正收缩:</p>
+<ul>
+<li>目标索引必须不存在</li>
+<li>原索引比目标索引拥有更多的主分片数量</li>
+<li>目标索引的主分片数量必须是原索引主分片数量的一个因子</li>
+<li>原索引的所有分片总文档数必须小于2,147,483,519，因为如果这些分片收缩到目标索引的单个分片上，这个数字是可以放入单个分片的最大文档数。</li>
+<li>处理收缩过程的节点必须具有足够的磁盘空间，以容纳现有索引的第二个拷贝。</li>
+</ul>
+</blockquote>
+<p><code>_shrink</code> API 有点类似于创建索引的 API，目标索引可以设置<code>settings</code> 及 <code>alias</code> 参数：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">POST my_source_index/_shrink/my_target_index?copy_settings=true</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"settings"</span>: &#123;</span><br><span class="line">    <span class="attr">"index.number_of_replicas"</span>: <span class="number">1</span>,</span><br><span class="line">    "index.number_of_shards": 1, (1)</span><br><span class="line">    "index.codec": "best_compression" (2)</span><br><span class="line">  &#125;,</span><br><span class="line">	"aliases": &#123;</span><br><span class="line">    "my_search_indices": &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 对应的 java 客户端实现</span><br><span class="line">CreateIndexRequest createIndexRequest = new CreateIndexRequest(targetIndex);</span><br><span class="line">createIndexRequest.settings(Settings.builder()</span><br><span class="line">        .putNull("index.routing.allocation.require._name")</span><br><span class="line">        .putNull("index.blocks.write")</span><br><span class="line">        .put("index.number_of_replicas", 1)</span><br><span class="line">        .put("index.number_of_shards", 1)</span><br><span class="line">        .put("index.codec", "best_compression")</span><br><span class="line">        .build());</span><br><span class="line">createIndexRequest.alias(new Alias("my_search_indices"));</span><br><span class="line">ResizeResponse resizeResponse = getClient().admin().indices()</span><br><span class="line">        .prepareResizeIndex(sourceIndex, targetIndex)</span><br><span class="line">        .setResizeType(ResizeType.SHRINK)</span><br><span class="line">        .setTargetIndex(createIndexRequest)</span><br><span class="line">        .setWaitForActiveShards(1)</span><br><span class="line">        .get();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>(1) 目标索引的主分片数，其值必须是原索引分片数的因子。</p>
+<p>(2) 最佳压缩仅对索引新写入起效，例如强制合并分片到单个段时。</p>
+</blockquote>
+<p>其它注意事项：</p>
+<ul>
+<li><code>_shrink</code> 请求时不可指定 <code>mapping</code></li>
+<li>默认情况下，在<code>_shrink</code> 请求时，除了<code>index.analysis</code> 、<code>index.similarity</code> 以及 <code>index.sort</code> 之外，其余原索引的配置将不会拷贝到目标索引。我们可以通过将 url 参数<code>copy_settings</code> 设置为 <code>true</code>， 使得所有不拷贝的配置拷贝到目标索引中。请注意，<code>copy_settings</code> 不可设置为 <code>false</code>，此参数将在 8.0.0 中移除。</li>
+</ul>
+<h1 id="监控收缩过程"><a href="#监控收缩过程" class="headerlink" title="监控收缩过程"></a>监控收缩过程</h1><p>收缩过程可以使用 <code>_cat recovery API</code> 监控，或者使用 <code>cluster health API</code> 设置 <code>wait_for_status</code> 为 <code>yellow</code> 来等待完成所有主分片的分配，例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /_cluster/health?wait_for_status=yellow&amp;timeout=50s</span><br></pre></td></tr></table></figure>
+<p><code>_shrink</code> API 在目标索引加入集群状态后立即返回，它不会等待分片分片完成。此时，所有分片都处于 <code>unasigned</code> 状态，基于任何原因无法在收缩节点上分配目标索引，其主分片都将保持未分配状态，直到可以在该节点上分配为止。</p>
+<p>一旦住分片分配完成，其状态将转换为 <code>initializing</code>，此时收缩过程将真正开始。当收缩操作结束，分片状态为<code>active</code>。在这之后，Elasticsearch 将尝试分配副本，并可能决定将主分片重定位到另一个节点上。</p>
+<h1 id="等待分片可用（active）"><a href="#等待分片可用（active）" class="headerlink" title="等待分片可用（active）"></a>等待分片可用（active）</h1><p>由于收缩操作会创建一个新的索引来缩小分片，因此在创建索引时等待活动分片的设置，也适用于收缩索引操作。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2019/11/22/elasticsearch-学习笔记之-match-phrase-prefix/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1990,195 +2189,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://shucunbin.github.io/2018/09/29/springboot-data-elasticsearch-版本整理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cunbin.shu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shucunbin's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/29/springboot-data-elasticsearch-版本整理/" itemprop="url">
-                  springboot-data-elasticsearch 版本整理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-09-29 11:38:00" itemprop="dateCreated datePublished" datetime="2018-09-29T11:38:00+08:00">2018-09-29</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-09-30 13:33:00" itemprop="dateModified" datetime="2018-09-30T13:33:00+08:00">2018-09-30</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/elasticsearch/" itemprop="url" rel="index"><span itemprop="name">elasticsearch</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/09/29/springboot-data-elasticsearch-版本整理/" class="leancloud_visitors" data-flag-title="springboot-data-elasticsearch 版本整理">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Views: </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>日常开发中，习惯了使用 Spring 全家桶，其中 Spring Data 更是简化了各种类型数据的访问，不论是 jdbc、redis 还是 elasticsearch。对于 elasticsearch 而言，在使用的 api 版本上有一些特殊的要求，其官网文档上要求 elasticsearch java api 版本必须与连接的 elasticsearch 节点<strong>主版本</strong>一致。</p>
-<blockquote>
-<p>The client must have the same major version (e.g. 2.x, or 5.x) as the nodes in the cluster. Clients may connect to clusters which have a different minor version (e.g. 2.3.x) but it is possible that new functionality may not be supported. Ideally, the client should have the same version as the cluster.</p>
-</blockquote>
-<p>因此，我们在开发时需要仔细核对 spring-data-elasticsearch 与 elasticsearch 的版本对应关系：<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/29/springboot-data-elasticsearch-版本整理/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2226,7 +2236,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2323,7 +2333,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
